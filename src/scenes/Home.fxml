@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="738.0" prefWidth="1366.0" style="-fx-background-color: #EC3D06;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javacomp.HomeController">
+    <stylesheets>
+        <URL value="@/javacomp/home.css" />
+    </stylesheets>
+</AnchorPane>
