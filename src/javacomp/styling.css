@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@500&display=swap');
+
+
+/*START STYLING*/
+.bgPane{
+    -fx-background-image:url('../images/start-bg.png');
+    -fx-background-size:cover;
+}
+.buyticketB{
+    -fx-font-size: 20;
+    -fx-font-family: 'Work Sans', sans-serif;
+    -fx-text-fill: #202128;
+    -fx-background-color: #FFCC52;
+}
+
+.buyticketB:hover{
+    -fx-text-fill: #FFFFFF;
+    -fx-border-color: #FFFFFF;
+    -fx-border-width: 2px;
+}
+
+/*HOME STYLING*/
+.bgPane1{
+    -fx-background-image:url('../images/movie-selection.png');
+    -fx-background-size:cover;
+}
+
+.progressLabels{
+    -fx-font-size: 20;
+    -fx-font-family: 'Work Sans', sans-serif;
+    -fx-text-fill: #FFFFFF;
+}
+
+/*MOVIE SELECT STYLIN*/
+.seatNo{
+    -fx-font-size: 15;
+    -fx-text-fill: #F2F2F2;
+    -fx-font-family: 'Work Sans', sans-serif;
+    
+}
+.seatSelect:hover{
+    -fx-border-color: #231612;
+    -fx-border-width: 2px;
+    
+}
+.moviePoster:hover{
+    -fx-border-color: #FCFCFF;
+    -fx-border-width: 3px;
+}

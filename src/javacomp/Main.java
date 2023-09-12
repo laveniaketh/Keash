@@ -24,7 +24,7 @@ public class Main extends Application {
     public void mainStage() {
         try {
 
-            Parent root = FXMLLoader.load(getClass().getResource("/scenes/Home.fxml"));
+             Parent root = FXMLLoader.load(getClass().getResource("/scenes/Start.fxml"));
             Scene scene = new Scene(root);
         
 //            Image icon = new Image("/images/modailee-icon.png");
@@ -32,8 +32,8 @@ public class Main extends Application {
              stage.setTitle("Keash");
              stage.setFullScreen(true);
             
-//            String css = this.getClass().getResource("style.css").toExternalForm();
-//            scene.getStylesheets().add(css);
+            String css = this.getClass().getResource("styling.css").toExternalForm();
+            scene.getStylesheets().add(css);
                 
              stage.setScene(scene);
              stage.show();
