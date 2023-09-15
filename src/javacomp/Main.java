@@ -22,9 +22,9 @@ public class Main extends Application {
     }
         
     public void mainStage() {
-        try {
+        try {  
 
-             Parent root = FXMLLoader.load(getClass().getResource("/scenes/Start.fxml"));
+             Parent root = FXMLLoader.load(getClass().getResource("/scenes/Home.fxml"));
             Scene scene = new Scene(root);
         
 //            Image icon = new Image("/images/modailee-icon.png");

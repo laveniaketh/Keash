@@ -29,10 +29,10 @@
 .progressLabels{
     -fx-font-size: 20;
     -fx-font-family: 'Work Sans', sans-serif;
-    -fx-text-fill: #FFFFFF;
+    -fx-text-fill: #6E6E6D;
 }
 
-/*MOVIE SELECT STYLIN*/
+/*MOVIE SELECT STYLING*/
 .seatNo{
     -fx-font-size: 15;
     -fx-text-fill: #F2F2F2;
@@ -47,4 +47,35 @@
 .moviePoster:hover{
     -fx-border-color: #FCFCFF;
     -fx-border-width: 3px;
+}
+
+.timeschedComboBox{
+    -fx-font-size: 15;
+    -fx-background-color: #FCFCFF;
+    -fx-font-family: 'Work Sans', sans-serif;
+    -fx-text-fill: #F2F2F2;  
+}
+.tcktqtyLabel{
+    -fx-font-size: 15;
+    -fx-font-family: 'Work Sans', sans-serif;
+    -fx-text-fill: #F2F2F2;    
+}
+
+.tcktqtySpinner{
+    -fx-font-size: 15;
+    -fx-background-color: #FFCC52;
+    -fx-font-family: 'Work Sans', sans-serif;
+    -fx-text-fill: #231612;    
+}
+
+/*SNACKBAR STYLING*/
+
+.sbKC:hover{
+    -fx-border-color: #F2F2F2;
+    -fx-border-width: 4px;
+    
+}
+.yellowbgPane{
+    -fx-background-color: #FFD23F;
+    -fx-background-radius: 10;
 }
