@@ -21,7 +21,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="bgPane" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #282827;" stylesheets="@../javacomp/styling.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javacomp.HomeController">
    <children>
-      <HBox alignment="CENTER" layoutX="715.0" layoutY="10.0" prefHeight="70.0" prefWidth="629.0" spacing="50.0" stylesheets="@../javacomp/styling.css">
+      <HBox alignment="CENTER" layoutX="715.0" prefHeight="70.0" prefWidth="629.0" spacing="50.0" stylesheets="@../javacomp/styling.css">
          <children>
             <Label fx:id="moviePB" styleClass="progressLabels" stylesheets="@../javacomp/styling.css" text="Movie" textFill="WHITE">
                <font>
@@ -50,15 +50,15 @@
             </Label>
          </children>
       </HBox>
-      <Pane fx:id="donePane" layoutY="86.0" prefHeight="724.0" prefWidth="1374.0" style="-fx-background-color: #282827;">
+      <Pane fx:id="donePane" layoutY="70.0" prefHeight="698.0" prefWidth="1366.0" style="-fx-background-color: #282827;">
          <children>
-            <ImageView fitHeight="727.0" fitWidth="1376.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="698.0" fitWidth="1366.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/booked-successfully.png" />
                </image>
             </ImageView>
          </children></Pane>
-      <Pane fx:id="timePane" layoutY="85.0" prefHeight="685.0" prefWidth="1374.0" style="-fx-background-color: #282827;">
+      <Pane fx:id="timePane" layoutY="70.0" prefHeight="698.0" prefWidth="1366.0" style="-fx-background-color: #282827;">
          <children>
             <VBox alignment="CENTER" fillWidth="false" layoutX="60.0" layoutY="142.0" prefHeight="248.0" prefWidth="180.0" spacing="25.0">
                <children>
@@ -3847,7 +3847,7 @@
             </VBox>
          </children>
       </Pane>
-      <Pane fx:id="snackbarpane" layoutY="85.0" prefHeight="726.0" prefWidth="1374.0" style="-fx-background-color: #282827;">
+      <Pane fx:id="snackbarpane" layoutY="70.0" prefHeight="698.0" prefWidth="1366.0" style="-fx-background-color: #282827;">
          <children>
             <ImageView fitHeight="666.0" fitWidth="1127.0" layoutX="120.0" pickOnBounds="true">
                <image>
@@ -3863,7 +3863,7 @@
                               <Image url="@../images/KC1.png" />
                            </image>
                         </ImageView>
-                        <ToggleButton fx:id="kc1B" mnemonicParsing="false" onMouseEntered="#sbMouseHoverEntered" onMouseExited="#sbMouseHoverExit" opacity="0.0" prefHeight="191.0" prefWidth="199.0" />
+                        <ToggleButton fx:id="kc1B" mnemonicParsing="false" onAction="#selectSnackHighlighted" onMouseEntered="#sbMouseHoverEntered" onMouseExited="#sbMouseHoverExit" opacity="0.0" prefHeight="191.0" prefWidth="199.0" />
                      </children>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -3876,7 +3876,7 @@
                               <Image url="@../images/KC2.png" />
                            </image>
                         </ImageView>
-                        <ToggleButton fx:id="kc2B" mnemonicParsing="false" onMouseEntered="#sbMouseHoverEntered" onMouseExited="#sbMouseHoverExit" opacity="0.0" prefHeight="191.0" prefWidth="199.0" />
+                        <ToggleButton fx:id="kc2B" mnemonicParsing="false" onAction="#selectSnackHighlighted" onMouseEntered="#sbMouseHoverEntered" onMouseExited="#sbMouseHoverExit" opacity="0.0" prefHeight="191.0" prefWidth="199.0" />
                      </children>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -3889,7 +3889,7 @@
                               <Image url="@../images/KC3.png" />
                            </image>
                         </ImageView>
-                        <ToggleButton fx:id="kc3B" mnemonicParsing="false" onMouseEntered="#sbMouseHoverEntered" onMouseExited="#sbMouseHoverExit" opacity="0.0" prefHeight="191.0" prefWidth="199.0" />
+                        <ToggleButton fx:id="kc3B" mnemonicParsing="false" onAction="#selectSnackHighlighted" onMouseEntered="#sbMouseHoverEntered" onMouseExited="#sbMouseHoverExit" opacity="0.0" prefHeight="191.0" prefWidth="199.0" />
                      </children>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -3902,7 +3902,7 @@
                               <Image url="@../images/KC4.png" />
                            </image>
                         </ImageView>
-                        <ToggleButton fx:id="kc4B" mnemonicParsing="false" onMouseEntered="#sbMouseHoverEntered" onMouseExited="#sbMouseHoverExit" opacity="0.0" prefHeight="191.0" prefWidth="199.0" />
+                        <ToggleButton fx:id="kc4B" mnemonicParsing="false" onAction="#selectSnackHighlighted" onMouseEntered="#sbMouseHoverEntered" onMouseExited="#sbMouseHoverExit" opacity="0.0" prefHeight="191.0" prefWidth="199.0" />
                      </children>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -3922,7 +3922,7 @@
                                     <Image url="@../images/soda.png" />
                                  </image>
                               </ImageView>
-                              <ToggleButton fx:id="sbSoloB1" mnemonicParsing="false" onMouseEntered="#sbSoloMouseHoverEntered" onMouseExited="#sbSoloMouseHoverExit" opacity="0.0" prefHeight="120.0" prefWidth="120.0" />
+                              <ToggleButton fx:id="sbSoloB1" mnemonicParsing="false" onAction="#selectSnackSoloHighlighted" onMouseEntered="#sbSoloMouseHoverEntered" onMouseExited="#sbSoloMouseHoverExit" opacity="0.0" prefHeight="120.0" prefWidth="120.0" />
                            </children>
                         </StackPane>
                         <StackPane layoutX="10.0" layoutY="10.0" prefHeight="150.0" prefWidth="150.0">
@@ -3932,7 +3932,7 @@
                                     <Image url="@../images/iced-tea.png" />
                                  </image>
                               </ImageView>
-                              <ToggleButton fx:id="sbSoloB2" mnemonicParsing="false" onMouseEntered="#sbSoloMouseHoverEntered" onMouseExited="#sbSoloMouseHoverExit" opacity="0.0" prefHeight="120.0" prefWidth="120.0" />
+                              <ToggleButton fx:id="sbSoloB2" mnemonicParsing="false" onAction="#selectSnackSoloHighlighted" onMouseEntered="#sbSoloMouseHoverEntered" onMouseExited="#sbSoloMouseHoverExit" opacity="0.0" prefHeight="120.0" prefWidth="120.0" />
                            </children>
                         </StackPane>
                         <StackPane layoutX="10.0" layoutY="10.0" prefHeight="150.0" prefWidth="150.0">
@@ -3942,7 +3942,7 @@
                                     <Image url="@../images/water-bottle.png" />
                                  </image>
                               </ImageView>
-                              <ToggleButton fx:id="sbSoloB3" mnemonicParsing="false" onMouseEntered="#sbSoloMouseHoverEntered" onMouseExited="#sbSoloMouseHoverExit" opacity="0.0" prefHeight="120.0" prefWidth="120.0" />
+                              <ToggleButton fx:id="sbSoloB3" mnemonicParsing="false" onAction="#selectSnackSoloHighlighted" onMouseEntered="#sbSoloMouseHoverEntered" onMouseExited="#sbSoloMouseHoverExit" opacity="0.0" prefHeight="120.0" prefWidth="120.0" />
                            </children>
                         </StackPane>
                         <StackPane layoutX="240.0" layoutY="10.0" prefHeight="150.0" prefWidth="150.0">
@@ -3952,7 +3952,7 @@
                                     <Image url="@../images/popcorn.png" />
                                  </image>
                               </ImageView>
-                              <ToggleButton fx:id="sbSoloB4" mnemonicParsing="false" onMouseEntered="#sbSoloMouseHoverEntered" onMouseExited="#sbSoloMouseHoverExit" opacity="0.0" prefHeight="120.0" prefWidth="120.0" />
+                              <ToggleButton fx:id="sbSoloB4" mnemonicParsing="false" onAction="#selectSnackSoloHighlighted" onMouseEntered="#sbSoloMouseHoverEntered" onMouseExited="#sbSoloMouseHoverExit" opacity="0.0" prefHeight="120.0" prefWidth="120.0" />
                            </children>
                         </StackPane>
                         <StackPane layoutX="355.0" layoutY="10.0" prefHeight="185.0" prefWidth="185.0">
@@ -3962,7 +3962,7 @@
                                     <Image url="@../images/chocolate-bar.png" />
                                  </image>
                               </ImageView>
-                              <ToggleButton fx:id="sbSoloB5" mnemonicParsing="false" onMouseEntered="#sbSoloMouseHoverEntered" onMouseExited="#sbSoloMouseHoverExit" opacity="0.0" prefHeight="120.0" prefWidth="120.0" />
+                              <ToggleButton fx:id="sbSoloB5" mnemonicParsing="false" onAction="#selectSnackSoloHighlighted" onMouseEntered="#sbSoloMouseHoverEntered" onMouseExited="#sbSoloMouseHoverExit" opacity="0.0" prefHeight="120.0" prefWidth="120.0" />
                            </children>
                         </StackPane>
                         <StackPane layoutX="438.0" layoutY="10.0" prefHeight="185.0" prefWidth="185.0">
@@ -3972,7 +3972,7 @@
                                     <Image url="@../images/cupcake.png" />
                                  </image>
                               </ImageView>
-                              <ToggleButton fx:id="sbSoloB6" mnemonicParsing="false" onMouseEntered="#sbSoloMouseHoverEntered" onMouseExited="#sbSoloMouseHoverExit" opacity="0.0" prefHeight="120.0" prefWidth="120.0" />
+                              <ToggleButton fx:id="sbSoloB6" mnemonicParsing="false" onAction="#selectSnackSoloHighlighted" onMouseEntered="#sbSoloMouseHoverEntered" onMouseExited="#sbSoloMouseHoverExit" opacity="0.0" prefHeight="120.0" prefWidth="120.0" />
                            </children>
                         </StackPane>
                      </children>
@@ -4000,9 +4000,38 @@
             </HBox>
          </children>
       </Pane>
-      <Pane fx:id="moviePane" layoutY="86.0" prefHeight="726.0" prefWidth="1374.0" style="-fx-background-color: #282827;">
+      <Pane fx:id="confirmpane" layoutY="70.0" prefHeight="698.0" prefWidth="1366.0" style="-fx-background-color: #282827;">
          <children>
-            <ImageView fitHeight="667.0" fitWidth="1374.0" layoutX="-2.0" layoutY="-96.0" pickOnBounds="true" preserveRatio="true" y="95.0">
+            <ImageView fitHeight="698.0" fitWidth="1366.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/confirmation.png" />
+               </image>
+            </ImageView>
+            <HBox alignment="CENTER" layoutX="442.0" layoutY="615.0" prefHeight="48.0" prefWidth="190.0" spacing="80.0">
+               <children>
+                  <ImageView fx:id="prevB2" fitHeight="53.0" fitWidth="50.0" onMouseClicked="#backToSnackSelect" onMouseEntered="#prevBMouseEntered" onMouseExited="#prevBMouseExited" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/back.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <ImageView fx:id="nextB2" fitHeight="53.0" fitWidth="50.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#proceedToDone" onMouseEntered="#nextBMouseEntered" onMouseExited="#nextBMouseExited" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/next.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+      <Pane fx:id="moviePane" layoutY="70.0" prefHeight="698.0" prefWidth="1366.0" style="-fx-background-color: #282827;">
+         <children>
+            <ImageView fitHeight="698.0" fitWidth="1366.0" layoutX="-2.0" layoutY="-96.0" pickOnBounds="true" preserveRatio="true" y="95.0">
                <image>
                   <Image url="@../images/movie-selection.png" />
                </image>

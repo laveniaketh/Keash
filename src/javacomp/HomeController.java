@@ -799,6 +799,12 @@ public class HomeController implements Initializable {
     private ImageView prevB1;
     @FXML
     private ImageView nextB1;
+    @FXML
+    private Pane confirmpane;
+    @FXML
+    private ImageView prevB2;
+    @FXML
+    private ImageView nextB2;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -1001,11 +1007,11 @@ public class HomeController implements Initializable {
         for(int x = 0; x < s.length; x++){
             if(s[x].isSelected()){
                 //System.out.println("select seat" + (x+1));
-                Image icon = new Image("/keashdraft/chairw.png");
+                Image icon = new Image("/images/chairw.png");
                 ic[x].setImage(icon); 
             }
             else if(!s[x].isSelected()){
-                Image icon = new Image("/keashdraft/chair1.png");
+                Image icon = new Image("/images/chair1.png");
                 ic[x].setImage(icon); 
             }            
         }       
@@ -1015,24 +1021,33 @@ public class HomeController implements Initializable {
     private void prevBMouseExited(MouseEvent event) {
         Image icon = new Image("/images/back.png");
         prevB.setImage(icon);
+        prevB1.setImage(icon);
+        prevB2.setImage(icon);
+       
     }
 
     @FXML
     private void prevBMouseEntered(MouseEvent event) {
         Image icon = new Image("/images/back-hover.png");
-        prevB.setImage(icon);        
+        prevB.setImage(icon);     
+        prevB1.setImage(icon);
+        prevB2.setImage(icon);       
     }
 
     @FXML
     private void nextBMouseExited(MouseEvent event) {
         Image icon = new Image("/images/next.png");
-        nextB.setImage(icon);       
+        nextB.setImage(icon);
+        nextB1.setImage(icon); 
+        nextB2.setImage(icon); 
     }
 
     @FXML
     private void nextBMouseEntered(MouseEvent event) {
         Image icon = new Image("/images/next-hover.png");
         nextB.setImage(icon);
+        nextB1.setImage(icon); 
+        nextB2.setImage(icon);       
     }
 
     @FXML
@@ -1058,7 +1073,7 @@ public class HomeController implements Initializable {
     @FXML
     private void sbMouseHoverExit(MouseEvent event) {
         for(int i = 0; i < sbButton.length ; i++){
-            if(!sbButton[i].isHover()){
+            if(!sbButton[i].isSelected()){
                 if(i == 0){
                     Image icon = new Image("/images/KC1.png");
                     sbImg[i].setImage(icon);
@@ -1084,7 +1099,7 @@ public class HomeController implements Initializable {
     @FXML
     private void sbMouseHoverEntered(MouseEvent event) {
         for(int i = 0; i < sbButton.length ; i++){
-            if(sbButton[i].isHover()){
+            if(!sbButton[1].isSelected() && sbButton[i].isHover()){
                 if(i == 0){
                     Image icon = new Image("/images/KC1-hover.png");
                     sbImg[i].setImage(icon);
@@ -1110,7 +1125,7 @@ public class HomeController implements Initializable {
     @FXML
     private void sbSoloMouseHoverEntered(MouseEvent event) {
         for(int i = 0; i < sbSoloButton.length; i++){
-            if(sbSoloButton[i].isHover()){
+            if(!sbSoloButton[1].isSelected() && sbSoloButton[i].isHover()){
                 if(i == 0){
                     Image icon = new Image("/images/soda-hover.png");
                     sbSoloImg[i].setImage(icon);
@@ -1154,7 +1169,7 @@ public class HomeController implements Initializable {
     @FXML
     private void sbSoloMouseHoverExit(MouseEvent event) {
         for(int i = 0; i < sbSoloButton.length; i++){
-            if(!sbSoloButton[i].isHover()){
+            if(!sbSoloButton[i].isSelected()){
                 if(i == 0){
                     Image icon = new Image("/images/soda.png");
                     sbSoloImg[i].setImage(icon);
@@ -1204,13 +1219,156 @@ public class HomeController implements Initializable {
 
     @FXML
     private void backToTimeSelect(MouseEvent event) {
-                timePane.toFront();
+        timePane.toFront();
         snackPB.setStyle("-fx-font-family: 'Work Sans', sans-serif; -fx-font-size: 20; -fx-text-fill: #6E6E6D;");
         timePB.setStyle("-fx-font-family: 'Work Sans', sans-serif; -fx-font-size: 20; -fx-text-fill: #FFFFFF;");
     }
 
     @FXML
     private void proceedToConfirm(MouseEvent event) {
+        confirmpane.toFront();
+        snackPB.setStyle("-fx-font-family: 'Work Sans', sans-serif; -fx-font-size: 20; -fx-text-fill: #6E6E6D;");
+        confirmationPB.setStyle("-fx-font-family: 'Work Sans', sans-serif; -fx-font-size: 20; -fx-text-fill: #FFFFFF;");        
+    }
+
+    @FXML
+    private void selectSnackHighlighted(ActionEvent event) {
+        for(int i = 0; i < sbButton.length ; i++){
+            if(sbButton[i].isSelected()){
+                if(i == 0){
+                    Image icon = new Image("/images/KC1-hover.png");
+                    sbImg[i].setImage(icon);
+                }
+                else if( i == 1){
+                    Image icon = new Image("/images/KC2-hover.png");
+                    sbImg[i].setImage(icon);                 
+                }
+                else if(i == 2){
+                    Image icon = new Image("/images/KC3-hover.png");
+                    sbImg[i].setImage(icon);                   
+                }
+                else if(i == 3){
+                    Image icon = new Image("/images/KC4-hover.png");
+                    sbImg[i].setImage(icon);                    
+                }
+                
+            }
+            else if(!sbButton[i].isSelected()){
+                if(i == 0){
+                    Image icon = new Image("/images/KC1.png");
+                    sbImg[i].setImage(icon);
+                }
+                else if( i == 1){
+                    Image icon = new Image("/images/KC2.png");
+                    sbImg[i].setImage(icon);                 
+                }
+                else if(i == 2){
+                    Image icon = new Image("/images/KC3.png");
+                    sbImg[i].setImage(icon);                   
+                }
+                else if(i == 3){
+                    Image icon = new Image("/images/KC4.png");
+                    sbImg[i].setImage(icon);                    
+                }              
+            }         
+        }          
+        
+    }
+
+    @FXML
+    private void selectSnackSoloHighlighted(ActionEvent event) {
+        for(int i = 0; i < sbSoloButton.length; i++){
+            if(sbSoloButton[i].isSelected()){
+                if(i == 0){
+                    Image icon = new Image("/images/soda-hover.png");
+                    sbSoloImg[i].setImage(icon);
+                    sbSoloImg[i].setFitWidth(120);
+                    sbSoloImg[i].setFitHeight(120);                  
+                }
+                else if(i == 1){
+                    Image icon = new Image("/images/iced-tea-hover.png");
+                    sbSoloImg[i].setImage(icon); 
+                    sbSoloImg[i].setFitWidth(120);
+                    sbSoloImg[i].setFitHeight(120);
+                }
+                else if (i == 2){
+                    Image icon = new Image("/images/water-bottle-hover.png");
+                    sbSoloImg[i].setImage(icon);  
+                    sbSoloImg[i].setFitWidth(120);
+                    sbSoloImg[i].setFitHeight(120);                  
+                }
+                else if(i == 3){
+                    Image icon = new Image("/images/popcorn-hover.png");
+                    sbSoloImg[i].setImage(icon); 
+                    sbSoloImg[i].setFitWidth(120);
+                    sbSoloImg[i].setFitHeight(120);
+                }
+                else if(i == 4){
+                    Image icon = new Image("/images/chocolate-bar-hover.png");
+                    sbSoloImg[i].setImage(icon);
+                    sbSoloImg[i].setFitWidth(120);
+                    sbSoloImg[i].setFitHeight(120);
+                }
+                else if(i == 5){
+                    Image icon = new Image("/images/cupcake-hover.png");
+                    sbSoloImg[i].setImage(icon);
+                    sbSoloImg[i].setFitWidth(120);
+                    sbSoloImg[i].setFitHeight(120);
+                }
+            }
+            else if(!sbSoloButton[i].isSelected()){
+                if(i == 0){
+                    Image icon = new Image("/images/soda.png");
+                    sbSoloImg[i].setImage(icon);
+                    sbSoloImg[i].setFitWidth(100);
+                    sbSoloImg[i].setFitHeight(100);                   
+                }
+                else if(i == 1){
+                    Image icon = new Image("/images/iced-tea.png");
+                    sbSoloImg[i].setImage(icon); 
+                    sbSoloImg[i].setFitWidth(100);
+                    sbSoloImg[i].setFitHeight(100); 
+                }
+                else if (i == 2){
+                    Image icon = new Image("/images/water-bottle.png");
+                    sbSoloImg[i].setImage(icon);
+                    sbSoloImg[i].setFitWidth(100);
+                    sbSoloImg[i].setFitHeight(100); 
+                }
+                else if(i == 3){
+                    Image icon = new Image("/images/popcorn.png");
+                    sbSoloImg[i].setImage(icon);
+                    sbSoloImg[i].setFitWidth(100);
+                    sbSoloImg[i].setFitHeight(100); 
+                }
+                else if(i == 4){
+                    Image icon = new Image("/images/chocolate-bar.png");
+                    sbSoloImg[i].setImage(icon);
+                    sbSoloImg[i].setFitWidth(100);
+                    sbSoloImg[i].setFitHeight(100); 
+                }
+                else if(i == 5){
+                    Image icon = new Image("/images/cupcake.png");
+                    sbSoloImg[i].setImage(icon);
+                    sbSoloImg[i].setFitWidth(100);
+                    sbSoloImg[i].setFitHeight(100); 
+                }              
+            }
+        }      
+    }
+
+    @FXML
+    private void backToSnackSelect(MouseEvent event) {
+        snackbarpane.toFront();
+        confirmationPB.setStyle("-fx-font-family: 'Work Sans', sans-serif; -fx-font-size: 20; -fx-text-fill: #6E6E6D;");
+        snackPB.setStyle("-fx-font-family: 'Work Sans', sans-serif; -fx-font-size: 20; -fx-text-fill: #FFFFFF;");
+    }
+
+    @FXML
+    private void proceedToDone(MouseEvent event) {
+        donePane.toFront();
+        confirmationPB.setStyle("-fx-font-family: 'Work Sans', sans-serif; -fx-font-size: 20; -fx-text-fill: #6E6E6D;");
+        donePB.setStyle("-fx-font-family: 'Work Sans', sans-serif; -fx-font-size: 20; -fx-text-fill: #FFFFFF;");       
     }
     
 }

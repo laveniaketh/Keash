@@ -24,13 +24,13 @@ public class Main extends Application {
     public void mainStage() {
         try {  
 
-             Parent root = FXMLLoader.load(getClass().getResource("/scenes/Home.fxml"));
+             Parent root = FXMLLoader.load(getClass().getResource("/scenes/Login.fxml"));
             Scene scene = new Scene(root);
         
-//            Image icon = new Image("/images/modailee-icon.png");
-//             stage.getIcons().add(icon); 
+            Image icon = new Image("/images/keash-logo.png");
+             stage.getIcons().add(icon); 
              stage.setTitle("Keash");
-             stage.setFullScreen(true);
+             stage.setFullScreen(false);
             
             String css = this.getClass().getResource("styling.css").toExternalForm();
             scene.getStylesheets().add(css);
