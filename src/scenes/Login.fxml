@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #282827;" xmlns="http://javafx.com/javafx/8.0.382" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javacomp.LoginController">
+<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #282827;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javacomp.LoginController">
     <stylesheets>
         <URL value="@/javacomp/styling.css" />
     </stylesheets>

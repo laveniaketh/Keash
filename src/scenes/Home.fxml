@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="bgPane" prefHeight="738.0" prefWidth="1366.0" style="-fx-background-color: #282827;" stylesheets="@../javacomp/styling.css" xmlns="http://javafx.com/javafx/8.0.382" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javacomp.HomeController">
+<AnchorPane id="AnchorPane" fx:id="bgPane" prefHeight="738.0" prefWidth="1366.0" style="-fx-background-color: #282827;" stylesheets="@../javacomp/styling.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javacomp.HomeController">
    <children>
       <HBox alignment="CENTER" layoutX="715.0" prefHeight="50.0" prefWidth="629.0" spacing="50.0" stylesheets="@../javacomp/styling.css">
          <children>
