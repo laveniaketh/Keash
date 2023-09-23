@@ -808,6 +808,8 @@ public class HomeController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Database.connect();
+        displayMoviePosters();
         
         sbButton = new ToggleButton[4];
         sbButton[0] = kc1B;
@@ -838,6 +840,15 @@ public class HomeController implements Initializable {
         sbSoloImg[5] = sbSoloImg6;
         
         moviePB.setStyle("-fx-font-family: 'Work Sans', sans-serif; -fx-font-size: 20; -fx-text-fill: #FFFFFF;");
+
+        
+        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 164);
+        valueFactory.setValue(1);
+	getTicketqty.setValueFactory(valueFactory);
+        
+        
+    }
+    void initializeSeats(){
         s = new ToggleButton[164];
         s[0] = seatTb1; s[1] = seatTb2; s[2] = seatTb3; s[3] = seatTb4; s[4] = seatTb5; s[5] = seatTb6;
         s[6] = seatTb7; s[7] = seatTb8; s[8] = seatTb9; s[9] = seatTb10; s[10] = seatTb11; s[11] = seatTb12;
@@ -896,13 +907,7 @@ public class HomeController implements Initializable {
         ic[144] = seatIcon145; ic[145] = seatIcon146; ic[146] = seatIcon147; ic[147] = seatIcon148; ic[148] = seatIcon149; ic[149] = seatIcon150;
         ic[150] = seatIcon151; ic[151] = seatIcon152; ic[152] = seatIcon153; ic[153] = seatIcon154; ic[154] = seatIcon155; ic[155] = seatIcon156;
         ic[156] = seatIcon157; ic[157] = seatIcon158; ic[158] = seatIcon159; ic[159] = seatIcon160; ic[160] = seatIcon161; ic[161] = seatIcon162;
-        ic[162] = seatIcon163; ic[163] = seatIcon164;
-        
-        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 164);
-        valueFactory.setValue(1);
-	getTicketqty.setValueFactory(valueFactory);
-        
-        
+        ic[162] = seatIcon163; ic[163] = seatIcon164;      
     }
     
     void allMovieTitleToArray(){  
@@ -910,7 +915,7 @@ public class HomeController implements Initializable {
             ps = Database.connect().prepareStatement("SELECT * FROM `movielist`");
             rs = ps.executeQuery();
                 while(rs.next()){
-                 movieList.add(rs.getString("Movie Title"));  
+                 movieList.add(rs.getString("Title"));  
                 }
         } catch (SQLException ex) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
@@ -925,7 +930,7 @@ public class HomeController implements Initializable {
         for(int i = 0 ; i < movieList.size(); i++){
             mname = movieList.get(i);
             try {
-                ps = Database.connect().prepareStatement("SELECT `image` FROM `movielist` WHERE `Movie Title`=?");
+                ps = Database.connect().prepareStatement("SELECT `Poster` FROM `movielist` WHERE `Title`=?");
                 ps.setString(1, mname);
                 rs = ps.executeQuery();
                 while(rs.next()){
@@ -933,25 +938,26 @@ public class HomeController implements Initializable {
                             blob = rs.getBlob(1);
                             in = blob.getBinaryStream(); 
                             img = new Image(in);
-                            posterIcon1 = new ImageView(img);  
+                            posterIcon1.setImage(img);
+//                            posterIcon1 = new ImageView(img);  
                         }
                     else if ( i == 1){
                             blob = rs.getBlob(1);
                             in = blob.getBinaryStream(); 
                             img = new Image(in);
-                            posterIcon2 = new ImageView(img);                        
+                            posterIcon2.setImage(img);                        
                         }
                     else if (i ==2){
                             blob = rs.getBlob(1);
                             in = blob.getBinaryStream(); 
                             img = new Image(in);
-                            posterIcon3 = new ImageView(img);
+                            posterIcon3.setImage(img);;
                         }
                     else if( i == 3){
                             blob = rs.getBlob(1);
                             in = blob.getBinaryStream(); 
                             img = new Image(in);
-                            posterIcon4 = new ImageView(img);
+                            posterIcon4.setImage(img);
                         }
                 }               
             } catch (SQLException ex) {
@@ -1052,6 +1058,7 @@ public class HomeController implements Initializable {
 
     @FXML
     private void selectMovie(MouseEvent event) {
+        initializeSeats();
         timePane.toFront();
         moviePB.setStyle("-fx-font-family: 'Work Sans', sans-serif; -fx-font-size: 20; -fx-text-fill: #6E6E6D;");
         timePB.setStyle("-fx-font-family: 'Work Sans', sans-serif; -fx-font-size: 20; -fx-text-fill: #FFFFFF;");

@@ -87,24 +87,14 @@
 .iconLabels{
     -fx-font-size: 15;
     -fx-font-family: 'Work Sans', sans-serif;
-    -fx-text-fill: #FFFF;
-}
-.tableLabels{
-    -fx-font-size: 20;
-    -fx-font-family: 'Work Sans', sans-serif;
-    -fx-text-fill: #FFFF;
-}
-.table-view .column-header-background .label {
-     -fx-font-size: 20;
-     -fx-font-family: 'Work Sans', sans-serif;
-    -fx-text-fill: #FECB53;
+    -fx-text-fill: #FFFFFF;
 }
 
 /*LOGIN STYLING*/
 
 .texfields{
     -fx-font-size: 15;
-    -fx-text-fill: #FFFF;
+    -fx-text-fill: #FFFFFF;
     -fx-background-color: #262625;
     -fx-font-family: 'Work Sans', sans-serif;
     -fx-border-color: #30323D;
@@ -115,7 +105,7 @@
     -fx-font-size: 45;
     -fx-background-color: transparent;
     -fx-font-family: 'Bungee Inline', cursive;;
-    -fx-text-fill: #FFFF;  
+    -fx-text-fill: #FFFFFF;  
 }
 .sicLabel{
     -fx-font-size: 20;
@@ -175,6 +165,103 @@
 #getStartedB:hover{
     -fx-background-color: #6E6E6D;
     -fx-text-fill: #FFFF;
+}
+
+/*EDIT SCREENING TAB*/
+.tableLabels{
+    -fx-font-size: 18;
+    -fx-font-family: 'Work Sans', sans-serif;
+    -fx-text-fill: #FFFF;
+}
+.table-view .column-header-background {
+    -fx-background-color:  #282827;
+}
+
+.table-view .column-header-background .label {
+    -fx-font-size: 18;
+    -fx-font-family: 'Work Sans', sans-serif;
+    -fx-text-fill: #FFFFFF;
+}
+
+.table-view .column-header, .table-view.filler {
+    -fx-background-color: transparent;
+    -fx-fill: #FFF;
+}
+.editScreeningComp{
+    -fx-font-size: 18;
+    -fx-font-family: 'Work Sans', sans-serif;
+    -fx-text-fill: #FFFFFF;
+}
+.editScreeningB{
+    -fx-font-size: 18;
+    -fx-background-color:  #FECB53;
+    -fx-font-family: 'Work Sans', sans-serif;
+    -fx-text-fill: #262625;
+    -fx-background-radius: 10;    
+}
+.editScreeningB:hover{
+    -fx-background-color: #6E6E6D;
+    -fx-text-fill: #FFFFFF;
+}
+.editScreeningTexfields{
+    -fx-font-size: 15;
+    -fx-text-fill: #282827;
+    /*-fx-background-color: #262625;*/
+    -fx-font-family: 'Work Sans', sans-serif;
+    -fx-border-color: #30323D;
+    -fx-border: 0px 1px 0px 0px;
+    -fx-border-bottom: #30323D 1px;
+}
+.movieTitleLabel{
+    -fx-font-size: 20;
+    -fx-font-family: 'Work Sans', sans-serif;
+    -fx-text-fill: #FFFFFF;    
+}
+.descLabel{
+    -fx-font-size: 15;
+    -fx-font-family: 'Work Sans', sans-serif;
+    -fx-text-fill: #FFFFFF; 
+}
+
+/*DASHBOARD TAB*/
+
+.SummaryContainer{
+    -fx-background-color: #494948;    
+    -fx-background-radius: 10;
+    -fx-font-size: 12;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: 'Work Sans', sans-serif; 
+    -fx-effect: dropshadow(gaussian, rgba(59, 59, 59, 1), 0,0,0,2 );
+}
+.SummaryContainerLabel{
+    -fx-font-size: 19;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: 'Work Sans', sans-serif;  
+}
+.keashLabel{
+    -fx-font-size: 80;
+    -fx-text-fill: #FECB53;
+    /*-fx-font-family: 'Work Sans', sans-serif;*/
+    -fx-font-family: 'Bungee Inline', cursive;
+}
+.nowShowingMoviePoster{
+    -fx-background-color: #494948;    
+    -fx-background-radius: 5;
+    -fx-font-size: 12;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: 'Work Sans', sans-serif; 
+    /*-fx-effect: dropshadow(gaussian, rgba(59, 59, 59, 1), 0,0,0,2 );*/  
+}
+.nowShowingMoviePoster:hover{
+    -fx-text-fill: #FFFFFF;
+    -fx-border-color: #FFFFFF;
+    -fx-border-width: 2px;  
+}
+.nowShowingLabel{
+    -fx-font-size: 40;
+    -fx-background-color: transparent;
+    -fx-font-family: 'Bungee Inline', cursive;
+    -fx-text-fill: #FECB53;    
 }
 
 
