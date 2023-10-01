@@ -24,7 +24,7 @@ public class Main extends Application {
     public void mainStage() {
         try {  
 
-            Parent root = FXMLLoader.load(getClass().getResource("/scenes/Admin.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/scenes/Start.fxml"));
             Scene scene = new Scene(root);
    
             Image icon = new Image("/images/keash-logo.png");

@@ -12,6 +12,7 @@ import java.sql.Blob;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -118,13 +119,36 @@ public class AdminController implements Initializable {
     Stage stage;
     Scene scene;
     Parent root;
+    
+    ArrayList <String> movieList = new ArrayList();//all movie title array
+    String mname = ""; // movielist elements identifier
+    
+    @FXML
+    private ImageView posterIcon1;
+    @FXML
+    private Label posterLabel1;
+    @FXML
+    private ImageView posterIcon2;
+    @FXML
+    private Label posterLabel2;
+    @FXML
+    private ImageView posterIcon3;
+    @FXML
+    private Label posterLabel3;
+    @FXML
+    private ImageView posterIcon4;
+    @FXML
+    private Label posterLabel4;
+    
+
 
 
 
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        javacomp.Database.connect();
+        Database.connect();
+        displayMoviePosters();
  
         Image icon = new Image("/images/dashboard-icon-hover.png");
         dashboardImg.setImage(icon); 
@@ -169,17 +193,18 @@ public class AdminController implements Initializable {
         initializeAdminPaneButtons();
         for(int i = 0; i < adButtons.length; i++){
         if(adButtons[i].isSelected()){
-            if(i == 0){
+            if(i == 0){           
                 Image icon = new Image("/images/dashboard-icon-hover.png");
                 dashboardImg.setImage(icon);
                 dashboardPane.toFront();
+
             }
             else if(i == 1){
                 Image icon = new Image("/images/customer-icon-hover.png");
                 customerImg.setImage(icon);
                 customerPane.toFront();
             }
-            else if(i == 2){
+            else if(i == 2){               
                 Image icon = new Image("/images/edit-screening-icon-hover.png");           
                 editScreeningImg.setImage(icon);
                 movielistTable();
@@ -222,6 +247,69 @@ public class AdminController implements Initializable {
                 editScreeningImg.setImage(icon);              
                 }          
             }      
+        }
+    }
+  
+    void allMovieTitleToArray(){  
+        javacomp.Database.connect();  
+        movieList.clear();
+        try {
+            ps = Database.connect().prepareStatement("SELECT * FROM `movielist`");
+            rs = ps.executeQuery();
+                while(rs.next()){
+                 movieList.add(rs.getString("Title"));  
+                }
+        } catch (SQLException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+                
+    }
+
+    void displayMoviePosters(){
+        javacomp.Database.connect();
+        allMovieTitleToArray(); 
+        
+        for(int i = 0 ; i < movieList.size(); i++){
+            mname = movieList.get(i);
+            try {
+                ps = Database.connect().prepareStatement("SELECT `Poster` FROM `movielist` WHERE `Title`=?");
+                ps.setString(1, mname);
+                rs = ps.executeQuery();
+                while(rs.next()){
+                    if(i == 0){
+                            blob = rs.getBlob(1);
+                            in = blob.getBinaryStream(); 
+                            img = new Image(in);
+                            posterIcon1.setImage(img);
+                            posterLabel1.setText(movieList.get(i));
+                            
+                        }
+                    else if ( i == 1){
+                            blob = rs.getBlob(1);
+                            in = blob.getBinaryStream(); 
+                            img = new Image(in);
+                            posterIcon2.setImage(img);
+                            posterLabel2.setText(movieList.get(i));
+                        }
+                    else if (i ==2){
+                            blob = rs.getBlob(1);
+                            in = blob.getBinaryStream(); 
+                            img = new Image(in);
+                            posterIcon3.setImage(img);
+                            posterLabel3.setText(movieList.get(i));
+                        }
+                    else if( i == 3){
+                            blob = rs.getBlob(1);
+                            in = blob.getBinaryStream(); 
+                            img = new Image(in);
+                            posterIcon4.setImage(img);  
+                            posterLabel4.setText(movieList.get(i));
+                        }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }  
         }
     }
     
@@ -337,8 +425,6 @@ public class AdminController implements Initializable {
             Image img = new Image("/images/upload_poster.png");
             posterImg.setImage(img);
             
-
-            //lbl_image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/poster.png")));
             movieTitleTF.requestFocus();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -437,21 +523,47 @@ public class AdminController implements Initializable {
         ts2 = movieTimeSlot2TF.getText();
         ts3 = movieTimeSlot3TF.getText();
         try {
+            if(byte_image != null){            
+            ps = Database.connect().prepareStatement("UPDATE `movielist` SET `Title`= ?, `Description`= ?,`Timeslot 1`= ?,`Timeslot 2`= ?,`Timeslot 3`= ?,`Poster`= ? WHERE `movieID` = ?"); 
+            ps.setString(1, mtitle);
+            ps.setString(2, mdesc);
+            ps.setString(3, ts1);
+            ps.setString(4, ts2);
+            ps.setString(5, ts3);         
+            ps.setBytes(6, byte_image);   
+            ps.setString(7, mid); 
+
+            ps.executeUpdate();
+            dialogLabel.setText("Movie Updated Successfully");
+            movieTitleLabel.setText(mtitle);
+            descLabel.setText(mdesc); 
+            displayMoviePosters();
+            System.out.println("dp");
+            movielistTable();
+
+            movieTitleTF.requestFocus();                
+            }
+            else{
             ps = Database.connect().prepareStatement("UPDATE `movielist` SET `Title`= ?, `Description`= ?,`Timeslot 1`= ?,`Timeslot 2`= ?,`Timeslot 3`= ? WHERE `movieID` = ?"); 
             ps.setString(1, mtitle);
             ps.setString(2, mdesc);
             ps.setString(3, ts1);
             ps.setString(4, ts2);
-            ps.setString(5, ts3);
+            ps.setString(5, ts3);   
             ps.setString(6, mid); 
 
             ps.executeUpdate();
             dialogLabel.setText("Movie Updated Successfully");
             movieTitleLabel.setText(mtitle);
-            descLabel.setText(mdesc);                   
+            descLabel.setText(mdesc); 
+            displayMoviePosters();
+            System.out.println("dp");
             movielistTable();
 
-            movieTitleTF.requestFocus();
+            movieTitleTF.requestFocus(); 
+            byte_image = null;
+            }
+
 
            } catch (SQLException ex) {
                 throw new RuntimeException(ex);
@@ -499,6 +611,14 @@ public class AdminController implements Initializable {
         Image icon = new Image("/images/signout-icon.png");
         signoutImg.setImage(icon);      
     }
+
+    @FXML
+    private void setDialogLabelClear(ActionEvent event) {
+        dialogLabel.setText("");
+    }
+    
+
+
 
 
     

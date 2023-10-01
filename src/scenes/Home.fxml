@@ -7,6 +7,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -19,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="bgPane" prefHeight="738.0" prefWidth="1366.0" style="-fx-background-color: #282827;" stylesheets="@../javacomp/styling.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javacomp.HomeController">
+<AnchorPane id="AnchorPane" fx:id="bgPane" prefHeight="738.0" prefWidth="1366.0" style="-fx-background-color: #282827;" stylesheets="@../javacomp/styling.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javacomp.HomeController">
    <children>
       <HBox alignment="CENTER" layoutX="715.0" prefHeight="50.0" prefWidth="629.0" spacing="50.0" stylesheets="@../javacomp/styling.css">
          <children>
@@ -48,179 +50,30 @@
                   <Font size="28.0" />
                </font>
             </Label>
+            <ImageView fx:id="adminB" fitHeight="23.0" fitWidth="24.0" onMouseClicked="#proceedToLoginPage" onMouseEntered="#adminBMouseHoverEnter" onMouseExited="#adminBMouseHoverExit" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/adminB.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
          </children>
       </HBox>
-      <Pane fx:id="snackbarpane" layoutY="50.0" prefHeight="698.0" prefWidth="1366.0" style="-fx-background-color: #282827;">
-         <children>
-            <ImageView fitHeight="666.0" fitWidth="1127.0" layoutX="120.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../images/snackbar.jpg" />
-               </image>
-            </ImageView>
-            <HBox alignment="CENTER" layoutX="250.0" layoutY="140.0" prefHeight="153.0" prefWidth="825.0" spacing="50.0">
-               <children>
-                  <StackPane prefHeight="150.0" prefWidth="150.0" stylesheets="@../javacomp/styling.css">
-                     <children>
-                        <ImageView fx:id="kc1img" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/KC1.png" />
-                           </image>
-                        </ImageView>
-                        <ToggleButton fx:id="kc1B" mnemonicParsing="false" onAction="#selectSnackHighlighted" onMouseEntered="#sbMouseHoverEntered" onMouseExited="#sbMouseHoverExit" opacity="0.0" prefHeight="191.0" prefWidth="199.0" />
-                     </children>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </StackPane>
-                  <StackPane layoutX="10.0" layoutY="10.0" prefHeight="150.0" prefWidth="150.0">
-                     <children>
-                        <ImageView fx:id="kc2img" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/KC2.png" />
-                           </image>
-                        </ImageView>
-                        <ToggleButton fx:id="kc2B" mnemonicParsing="false" onAction="#selectSnackHighlighted" onMouseEntered="#sbMouseHoverEntered" onMouseExited="#sbMouseHoverExit" opacity="0.0" prefHeight="191.0" prefWidth="199.0" />
-                     </children>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </StackPane>
-                  <StackPane layoutX="210.0" layoutY="10.0" prefHeight="150.0" prefWidth="150.0">
-                     <children>
-                        <ImageView fx:id="kc3img" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/KC3.png" />
-                           </image>
-                        </ImageView>
-                        <ToggleButton fx:id="kc3B" mnemonicParsing="false" onAction="#selectSnackHighlighted" onMouseEntered="#sbMouseHoverEntered" onMouseExited="#sbMouseHoverExit" opacity="0.0" prefHeight="191.0" prefWidth="199.0" />
-                     </children>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </StackPane>
-                  <StackPane layoutX="410.0" layoutY="10.0" prefHeight="150.0" prefWidth="150.0">
-                     <children>
-                        <ImageView fx:id="kc4img" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/KC4.png" />
-                           </image>
-                        </ImageView>
-                        <ToggleButton fx:id="kc4B" mnemonicParsing="false" onAction="#selectSnackHighlighted" onMouseEntered="#sbMouseHoverEntered" onMouseExited="#sbMouseHoverExit" opacity="0.0" prefHeight="191.0" prefWidth="199.0" />
-                     </children>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </StackPane>
-               </children>
-            </HBox>
-            <StackPane layoutX="248.0" layoutY="360.0" prefHeight="132.0" prefWidth="827.0">
-               <children>
-                  <Pane prefHeight="200.0" prefWidth="200.0" styleClass="yellowbgPane" />
-                  <HBox prefHeight="158.0" prefWidth="763.0">
-                     <children>
-                        <StackPane prefHeight="150.0" prefWidth="150.0">
-                           <children>
-                              <ImageView fx:id="sbSoloImg1" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/soda.png" />
-                                 </image>
-                              </ImageView>
-                              <ToggleButton fx:id="sbSoloB1" mnemonicParsing="false" onAction="#selectSnackSoloHighlighted" onMouseEntered="#sbSoloMouseHoverEntered" onMouseExited="#sbSoloMouseHoverExit" opacity="0.0" prefHeight="120.0" prefWidth="120.0" />
-                           </children>
-                        </StackPane>
-                        <StackPane layoutX="10.0" layoutY="10.0" prefHeight="150.0" prefWidth="150.0">
-                           <children>
-                              <ImageView fx:id="sbSoloImg2" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/iced-tea.png" />
-                                 </image>
-                              </ImageView>
-                              <ToggleButton fx:id="sbSoloB2" mnemonicParsing="false" onAction="#selectSnackSoloHighlighted" onMouseEntered="#sbSoloMouseHoverEntered" onMouseExited="#sbSoloMouseHoverExit" opacity="0.0" prefHeight="120.0" prefWidth="120.0" />
-                           </children>
-                        </StackPane>
-                        <StackPane layoutX="10.0" layoutY="10.0" prefHeight="150.0" prefWidth="150.0">
-                           <children>
-                              <ImageView fx:id="sbSoloImg3" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/water-bottle.png" />
-                                 </image>
-                              </ImageView>
-                              <ToggleButton fx:id="sbSoloB3" mnemonicParsing="false" onAction="#selectSnackSoloHighlighted" onMouseEntered="#sbSoloMouseHoverEntered" onMouseExited="#sbSoloMouseHoverExit" opacity="0.0" prefHeight="120.0" prefWidth="120.0" />
-                           </children>
-                        </StackPane>
-                        <StackPane layoutX="240.0" layoutY="10.0" prefHeight="150.0" prefWidth="150.0">
-                           <children>
-                              <ImageView fx:id="sbSoloImg4" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/popcorn.png" />
-                                 </image>
-                              </ImageView>
-                              <ToggleButton fx:id="sbSoloB4" mnemonicParsing="false" onAction="#selectSnackSoloHighlighted" onMouseEntered="#sbSoloMouseHoverEntered" onMouseExited="#sbSoloMouseHoverExit" opacity="0.0" prefHeight="120.0" prefWidth="120.0" />
-                           </children>
-                        </StackPane>
-                        <StackPane layoutX="355.0" layoutY="10.0" prefHeight="185.0" prefWidth="185.0">
-                           <children>
-                              <ImageView fx:id="sbSoloImg5" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/chocolate-bar.png" />
-                                 </image>
-                              </ImageView>
-                              <ToggleButton fx:id="sbSoloB5" mnemonicParsing="false" onAction="#selectSnackSoloHighlighted" onMouseEntered="#sbSoloMouseHoverEntered" onMouseExited="#sbSoloMouseHoverExit" opacity="0.0" prefHeight="120.0" prefWidth="120.0" />
-                           </children>
-                        </StackPane>
-                        <StackPane layoutX="438.0" layoutY="10.0" prefHeight="185.0" prefWidth="185.0">
-                           <children>
-                              <ImageView fx:id="sbSoloImg6" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/cupcake.png" />
-                                 </image>
-                              </ImageView>
-                              <ToggleButton fx:id="sbSoloB6" mnemonicParsing="false" onAction="#selectSnackSoloHighlighted" onMouseEntered="#sbSoloMouseHoverEntered" onMouseExited="#sbSoloMouseHoverExit" opacity="0.0" prefHeight="120.0" prefWidth="120.0" />
-                           </children>
-                        </StackPane>
-                     </children>
-                  </HBox>
-               </children></StackPane>
-            <HBox alignment="CENTER" layoutX="550.0" layoutY="580.0" prefHeight="48.0" prefWidth="190.0" spacing="80.0">
-               <children>
-                  <ImageView fx:id="prevB1" fitHeight="53.0" fitWidth="50.0" onMouseClicked="#backToTimeSelect" onMouseEntered="#prevBMouseEntered" onMouseExited="#prevBMouseExited" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/back.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ImageView>
-                  <ImageView fx:id="nextB1" fitHeight="53.0" fitWidth="50.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#proceedToConfirm" onMouseEntered="#nextBMouseEntered" onMouseExited="#nextBMouseExited" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/next.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ImageView>
-               </children>
-            </HBox>
-         </children>
-      </Pane>
       <Pane fx:id="timePane" layoutY="50.0" prefHeight="698.0" prefWidth="1366.0" style="-fx-background-color: #282827;">
          <children>
-            <VBox alignment="CENTER" fillWidth="false" layoutX="60.0" layoutY="142.0" prefHeight="248.0" prefWidth="180.0" spacing="25.0">
+            <VBox alignment="CENTER" fillWidth="false" layoutX="60.0" layoutY="142.0" prefHeight="307.0" prefWidth="180.0" spacing="25.0">
                <children>
-                  <ComboBox prefHeight="29.0" prefWidth="182.0" promptText="Select Time" styleClass="timeschedComboBox" stylesheets="@../javacomp/styling.css" />
-                  <VBox alignment="CENTER" fillWidth="false" prefHeight="103.0" prefWidth="180.0" spacing="5.0">
+                  <ComboBox fx:id="timeslotComboBox" onAction="#checkAvailSeats" prefHeight="29.0" prefWidth="182.0" promptText="Select Time" styleClass="timeschedComboBox" stylesheets="@../javacomp/styling.css" />
+                  <VBox alignment="CENTER" fillWidth="false" prefHeight="132.0" prefWidth="180.0" spacing="5.0">
                      <children>
                         <Label alignment="BOTTOM_CENTER" styleClass="tcktqtyLabel" stylesheets="@../javacomp/styling.css" text="Ticket Quantity" textFill="WHITE">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Spinner fx:id="getTicketqty" prefHeight="43.0" prefWidth="74.0" styleClass="tcktqtytxtSpinner" stylesheets="@../javacomp/styling.css" />
-                        <Label prefHeight="75.0" prefWidth="174.0" textFill="WHITE" wrapText="true">
-                           <font>
-                              <Font size="11.0" />
-                           </font>
-                        </Label>
+                        <Spinner fx:id="ticketqty" onMouseReleased="#getTicketQty" prefHeight="43.0" prefWidth="74.0" styleClass="tcktqtytxtSpinner" stylesheets="@../javacomp/styling.css" />
+                        <Label fx:id="dialogLabel" alignment="TOP_LEFT" prefHeight="110.0" prefWidth="180.0" styleClass="tcktqtyLabel" stylesheets="@../javacomp/styling.css" wrapText="true" />
                      </children>
                   </VBox>
                   <HBox alignment="CENTER" prefHeight="48.0" prefWidth="190.0" spacing="80.0">
@@ -3992,14 +3845,298 @@
             </VBox>
          </children>
       </Pane>
+      <Pane fx:id="snackbarpane" layoutY="50.0" prefHeight="698.0" prefWidth="1366.0" style="-fx-background-color: #282827;">
+         <children>
+            <ImageView fitHeight="666.0" fitWidth="1127.0" layoutX="120.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/snackbar.jpg" />
+               </image>
+            </ImageView>
+            <HBox alignment="CENTER" layoutX="250.0" layoutY="140.0" prefHeight="153.0" prefWidth="825.0" spacing="50.0">
+               <children>
+                  <StackPane prefHeight="150.0" prefWidth="150.0" stylesheets="@../javacomp/styling.css">
+                     <children>
+                        <ImageView fx:id="kc1img" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/KC1.png" />
+                           </image>
+                        </ImageView>
+                        <ToggleButton fx:id="kc1B" mnemonicParsing="false" onAction="#selectSnackHighlighted" onMouseClicked="#selectComboSnack" onMouseEntered="#sbMouseHoverEntered" onMouseExited="#sbMouseHoverExit" opacity="0.0" prefHeight="191.0" prefWidth="199.0" />
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </StackPane>
+                  <StackPane layoutX="10.0" layoutY="10.0" prefHeight="150.0" prefWidth="150.0">
+                     <children>
+                        <ImageView fx:id="kc2img" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/KC2.png" />
+                           </image>
+                        </ImageView>
+                        <ToggleButton fx:id="kc2B" mnemonicParsing="false" onAction="#selectSnackHighlighted" onMouseClicked="#selectComboSnack" onMouseEntered="#sbMouseHoverEntered" onMouseExited="#sbMouseHoverExit" opacity="0.0" prefHeight="191.0" prefWidth="199.0" />
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </StackPane>
+                  <StackPane layoutX="210.0" layoutY="10.0" prefHeight="150.0" prefWidth="150.0">
+                     <children>
+                        <ImageView fx:id="kc3img" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/KC3.png" />
+                           </image>
+                        </ImageView>
+                        <ToggleButton fx:id="kc3B" mnemonicParsing="false" onAction="#selectSnackHighlighted" onMouseClicked="#selectComboSnack" onMouseEntered="#sbMouseHoverEntered" onMouseExited="#sbMouseHoverExit" opacity="0.0" prefHeight="191.0" prefWidth="199.0" />
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </StackPane>
+                  <StackPane layoutX="410.0" layoutY="10.0" prefHeight="150.0" prefWidth="150.0">
+                     <children>
+                        <ImageView fx:id="kc4img" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/KC4.png" />
+                           </image>
+                        </ImageView>
+                        <ToggleButton fx:id="kc4B" mnemonicParsing="false" onAction="#selectSnackHighlighted" onMouseClicked="#selectComboSnack" onMouseEntered="#sbMouseHoverEntered" onMouseExited="#sbMouseHoverExit" opacity="0.0" prefHeight="191.0" prefWidth="199.0" />
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </StackPane>
+               </children>
+            </HBox>
+            <StackPane layoutX="248.0" layoutY="360.0" prefHeight="132.0" prefWidth="827.0">
+               <children>
+                  <Pane prefHeight="200.0" prefWidth="200.0" styleClass="yellowbgPane" />
+                  <HBox prefHeight="158.0" prefWidth="763.0">
+                     <children>
+                        <StackPane prefHeight="150.0" prefWidth="150.0">
+                           <children>
+                              <ImageView fx:id="sbSoloImg1" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/soda.png" />
+                                 </image>
+                                 <StackPane.margin>
+                                    <Insets />
+                                 </StackPane.margin>
+                              </ImageView>
+                              <ToggleButton fx:id="sbSoloB1" mnemonicParsing="false" onAction="#selectSnackSoloHighlighted" onMouseClicked="#selectSnackSolo" onMouseEntered="#sbSoloMouseHoverEntered" onMouseExited="#sbSoloMouseHoverExit" opacity="0.0" prefHeight="120.0" prefWidth="120.0" />
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="10.0" layoutY="10.0" prefHeight="150.0" prefWidth="150.0">
+                           <children>
+                              <ImageView fx:id="sbSoloImg2" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/iced-tea.png" />
+                                 </image>
+                                 <StackPane.margin>
+                                    <Insets />
+                                 </StackPane.margin>
+                              </ImageView>
+                              <ToggleButton fx:id="sbSoloB2" mnemonicParsing="false" onAction="#selectSnackSoloHighlighted" onMouseClicked="#selectSnackSolo" onMouseEntered="#sbSoloMouseHoverEntered" onMouseExited="#sbSoloMouseHoverExit" opacity="0.0" prefHeight="120.0" prefWidth="120.0" />
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="10.0" layoutY="10.0" prefHeight="150.0" prefWidth="150.0">
+                           <children>
+                              <ImageView fx:id="sbSoloImg3" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/water-bottle.png" />
+                                 </image>
+                                 <StackPane.margin>
+                                    <Insets />
+                                 </StackPane.margin>
+                              </ImageView>
+                              <ToggleButton fx:id="sbSoloB3" mnemonicParsing="false" onAction="#selectSnackSoloHighlighted" onMouseClicked="#selectSnackSolo" onMouseEntered="#sbSoloMouseHoverEntered" onMouseExited="#sbSoloMouseHoverExit" opacity="0.0" prefHeight="120.0" prefWidth="120.0" />
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="240.0" layoutY="10.0" prefHeight="150.0" prefWidth="150.0">
+                           <children>
+                              <ImageView fx:id="sbSoloImg4" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/popcorn.png" />
+                                 </image>
+                                 <StackPane.margin>
+                                    <Insets />
+                                 </StackPane.margin>
+                              </ImageView>
+                              <ToggleButton fx:id="sbSoloB4" mnemonicParsing="false" onAction="#selectSnackSoloHighlighted" onMouseClicked="#selectSnackSolo" onMouseEntered="#sbSoloMouseHoverEntered" onMouseExited="#sbSoloMouseHoverExit" opacity="0.0" prefHeight="120.0" prefWidth="120.0" />
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="355.0" layoutY="10.0" prefHeight="185.0" prefWidth="185.0">
+                           <children>
+                              <ImageView fx:id="sbSoloImg5" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/chocolate-bar.png" />
+                                 </image>
+                                 <StackPane.margin>
+                                    <Insets />
+                                 </StackPane.margin>
+                              </ImageView>
+                              <ToggleButton fx:id="sbSoloB5" mnemonicParsing="false" onAction="#selectSnackSoloHighlighted" onMouseClicked="#selectSnackSolo" onMouseEntered="#sbSoloMouseHoverEntered" onMouseExited="#sbSoloMouseHoverExit" opacity="0.0" prefHeight="120.0" prefWidth="120.0" />
+                           </children>
+                        </StackPane>
+                        <StackPane layoutX="438.0" layoutY="10.0" prefHeight="185.0" prefWidth="185.0">
+                           <children>
+                              <ImageView fx:id="sbSoloImg6" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/cupcake.png" />
+                                 </image>
+                                 <StackPane.margin>
+                                    <Insets />
+                                 </StackPane.margin>
+                              </ImageView>
+                              <ToggleButton fx:id="sbSoloB6" mnemonicParsing="false" onAction="#selectSnackSoloHighlighted" onMouseClicked="#selectSnackSolo" onMouseEntered="#sbSoloMouseHoverEntered" onMouseExited="#sbSoloMouseHoverExit" opacity="0.0" prefHeight="120.0" prefWidth="120.0" />
+                           </children>
+                        </StackPane>
+                     </children>
+                  </HBox>
+               </children></StackPane>
+            <HBox alignment="CENTER" layoutX="550.0" layoutY="580.0" prefHeight="48.0" prefWidth="190.0" spacing="80.0">
+               <children>
+                  <ImageView fx:id="prevB1" fitHeight="53.0" fitWidth="50.0" onMouseClicked="#backToTimeSelect" onMouseEntered="#prevBMouseEntered" onMouseExited="#prevBMouseExited" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/back.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <ImageView fx:id="nextB1" fitHeight="53.0" fitWidth="50.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#proceedToConfirm" onMouseEntered="#nextBMouseEntered" onMouseExited="#nextBMouseExited" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/next.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="315.0" layoutY="283.0" prefHeight="76.0" prefWidth="726.0" spacing="100.0">
+               <children>
+                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Spinner fx:id="sbSpinner1" onMouseReleased="#getTicketQty" prefHeight="10.0" prefWidth="74.0" styleClass="tcktqtytxtSpinner" stylesheets="@../javacomp/styling.css" />
+                        <Label alignment="CENTER" prefHeight="28.0" prefWidth="111.0" text="SC1 - ₱129" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" layoutX="17.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Spinner fx:id="sbSpinner2" onMouseReleased="#getTicketQty" prefHeight="10.0" prefWidth="74.0" styleClass="tcktqtytxtSpinner" stylesheets="@../javacomp/styling.css" />
+                        <Label alignment="CENTER" prefHeight="28.0" prefWidth="111.0" text="SC2 - ₱149" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" layoutX="553.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Spinner fx:id="sbSpinner3" onMouseReleased="#getTicketQty" prefHeight="10.0" prefWidth="74.0" styleClass="tcktqtytxtSpinner" stylesheets="@../javacomp/styling.css" />
+                        <Label alignment="CENTER" prefHeight="28.0" prefWidth="111.0" text="SC3 - ₱119" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" layoutX="680.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Spinner fx:id="sbSpinner4" onMouseReleased="#getTicketQty" prefHeight="10.0" prefWidth="74.0" styleClass="tcktqtytxtSpinner" stylesheets="@../javacomp/styling.css" />
+                        <Label alignment="CENTER" prefHeight="28.0" prefWidth="111.0" text="SC4 - ₱139" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="253.0" layoutY="503.0" prefHeight="46.0" prefWidth="784.0" spacing="15.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="0.0" prefWidth="150.0">
+                     <children>
+                        <Spinner fx:id="sbSoloSpinner1" onMouseReleased="#getTicketQty" prefHeight="25.0" prefWidth="79.0" styleClass="tcktqtytxtSpinner" stylesheets="@../javacomp/styling.css" />
+                        <Label alignment="CENTER" prefHeight="28.0" prefWidth="111.0" text="Coke - ₱30" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" layoutX="660.0" layoutY="10.0" prefHeight="0.0" prefWidth="150.0">
+                     <children>
+                        <Spinner fx:id="sbSoloSpinner2" onMouseReleased="#getTicketQty" prefHeight="43.0" prefWidth="74.0" styleClass="tcktqtytxtSpinner" stylesheets="@../javacomp/styling.css" />
+                        <Label alignment="CENTER" prefHeight="28.0" prefWidth="111.0" text="Ice Tea - ₱45" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" layoutX="666.0" layoutY="10.0" prefHeight="46.0" prefWidth="162.0">
+                     <children>
+                        <Spinner fx:id="sbSoloSpinner3" onMouseReleased="#getTicketQty" prefHeight="43.0" prefWidth="74.0" styleClass="tcktqtytxtSpinner" stylesheets="@../javacomp/styling.css" />
+                        <Label alignment="CENTER" prefHeight="21.0" prefWidth="130.0" text="Water Bottle - ₱25" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" layoutX="686.0" layoutY="10.0" prefHeight="46.0" prefWidth="142.0">
+                     <children>
+                        <Spinner fx:id="sbSoloSpinner4" onMouseReleased="#getTicketQty" prefHeight="43.0" prefWidth="74.0" styleClass="tcktqtytxtSpinner" stylesheets="@../javacomp/styling.css" />
+                        <Label alignment="CENTER" prefHeight="28.0" prefWidth="111.0" text="Popcorn - ₱50" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" layoutX="704.0" layoutY="10.0" prefHeight="0.0" prefWidth="150.0">
+                     <children>
+                        <Spinner fx:id="sbSoloSpinner5" onMouseReleased="#getTicketQty" prefHeight="43.0" prefWidth="74.0" styleClass="tcktqtytxtSpinner" stylesheets="@../javacomp/styling.css" />
+                        <Label alignment="CENTER" prefHeight="28.0" prefWidth="111.0" text="Choco Bar - ₱15" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" layoutX="718.0" layoutY="10.0" prefHeight="0.0" prefWidth="150.0">
+                     <children>
+                        <Spinner fx:id="sbSoloSpinner6" onMouseReleased="#getTicketQty" prefHeight="43.0" prefWidth="74.0" styleClass="tcktqtytxtSpinner" stylesheets="@../javacomp/styling.css" />
+                        <Label alignment="CENTER" prefHeight="28.0" prefWidth="111.0" text="Cupcake - ₱10" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </Pane>
       <Pane fx:id="confirmpane" layoutY="50.0" prefHeight="698.0" prefWidth="1366.0" style="-fx-background-color: #282827;">
          <children>
+            <ImageView fitHeight="698.0" fitWidth="711.0" layoutX="650.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/film-strip-summary.png" />
+               </image>
+            </ImageView>
             <ImageView fitHeight="698.0" fitWidth="1366.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/confirmation.png" />
                </image>
             </ImageView>
-            <HBox alignment="CENTER" layoutX="442.0" layoutY="550.0" prefHeight="48.0" prefWidth="190.0" spacing="80.0">
+            <HBox alignment="CENTER" layoutX="442.0" layoutY="580.0" prefHeight="48.0" prefWidth="190.0" spacing="80.0">
                <children>
                   <ImageView fx:id="prevB2" fitHeight="53.0" fitWidth="50.0" onMouseClicked="#backToSnackSelect" onMouseEntered="#prevBMouseEntered" onMouseExited="#prevBMouseExited" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -4019,6 +4156,230 @@
                   </ImageView>
                </children>
             </HBox>
+            <StackPane layoutX="380.0" layoutY="30.0" prefHeight="487.0" prefWidth="318.0" styleClass="moviePosterSummary" stylesheets="@../javacomp/styling.css">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="494.0" prefWidth="318.0" spacing="10.0">
+                     <children>
+                        <ImageView fx:id="posterConfirm" fitHeight="399.0" fitWidth="272.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../images/pearl%20movie%20poster.jpg" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="movieTitleConfirm" alignment="CENTER" prefHeight="56.0" prefWidth="318.0" styleClass="moviePosterLabels" stylesheets="@../javacomp/styling.css" textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font size="20.0" />
+                           </font></Label>
+                     </children>
+                  </VBox>
+               </children>
+            </StackPane>
+            <StackPane layoutX="848.0" layoutY="85.0" prefHeight="254.0" prefWidth="301.0">
+               <children>
+                  <VBox alignment="CENTER" fillWidth="false" prefHeight="254.0" prefWidth="336.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="8.0" prefWidth="301.0" styleClass="confirmLabelTitle" text="SUMMARY" textFill="#4a4a4a">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                        </Label>
+                        <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="301.0" spacing="10.0">
+                           <children>
+                              <Label prefHeight="30.0" prefWidth="83.0" styleClass="confirmLabelDetails" text="MOVIE :" textFill="#4a4a4a">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <effect>
+                                    <InnerShadow />
+                                 </effect>
+                              </Label>
+                              <Label fx:id="smovie" layoutX="10.0" layoutY="10.0" prefHeight="61.0" prefWidth="237.0" styleClass="confirmLabelDetails" text="Everything Everywhere All At Once" textFill="#4a4a4a" wrapText="true">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <effect>
+                                    <InnerShadow />
+                                 </effect>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="55.0" prefHeight="40.0" prefWidth="407.0" spacing="10.0">
+                           <children>
+                              <Label prefHeight="30.0" prefWidth="154.0" styleClass="confirmLabelDetails" text="TIME    :" textFill="#4a4a4a">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <effect>
+                                    <InnerShadow />
+                                 </effect>
+                              </Label>
+                              <Label fx:id="stime" layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="312.0" styleClass="confirmLabelDetails" text="Label" textFill="#4a4a4a">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <effect>
+                                    <InnerShadow />
+                                 </effect>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="95.0" prefHeight="14.0" prefWidth="301.0" spacing="10.0">
+                           <children>
+                              <Label prefHeight="30.0" prefWidth="349.0" styleClass="confirmLabelDetails" text="NO. OF TICKETS :" textFill="#4a4a4a">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <effect>
+                                    <InnerShadow />
+                                 </effect>
+                              </Label>
+                              <Label fx:id="sticketqty" layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="364.0" styleClass="confirmLabelDetails" text="Label" textFill="#4a4a4a">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <effect>
+                                    <InnerShadow />
+                                 </effect>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="134.0" prefHeight="77.0" prefWidth="301.0">
+                           <children>
+                              <Label prefHeight="29.0" prefWidth="100.0" styleClass="confirmLabelDetails" text="SNACK(S):" textFill="#4a4a4a" wrapText="true">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <effect>
+                                    <InnerShadow />
+                                 </effect>
+                              </Label>
+                              <Label fx:id="ssnacks" layoutX="10.0" layoutY="10.0" prefHeight="61.0" prefWidth="241.0" styleClass="confirmLabelDetails" text="Label" textFill="#4a4a4a" wrapText="true">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <effect>
+                                    <InnerShadow />
+                                 </effect>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Label prefHeight="30.0" prefWidth="420.0" styleClass="confirmLabelDetails" text="SELECTED SEAT(S) :" textFill="#4a4a4a">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                        </Label>
+                        <Label fx:id="sseats" prefHeight="69.0" prefWidth="292.0" styleClass="confirmLabelDetails" text="Label" textFill="#4a4a4a">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </StackPane>
+            <StackPane layoutX="848.0" layoutY="360.0" prefHeight="254.0" prefWidth="301.0">
+               <children>
+                  <VBox alignment="CENTER" fillWidth="false" prefHeight="254.0" prefWidth="336.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="24.0" prefWidth="308.0" styleClass="confirmLabelTitle" text="PAYMENT DETAILS" textFill="#4a4a4a">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                        </Label>
+                        <HBox alignment="CENTER_LEFT" prefHeight="93.0" prefWidth="291.0" spacing="10.0">
+                           <children>
+                              <Label fx:id="movieP" prefHeight="91.0" prefWidth="228.0" styleClass="confirmLabelDetails" text="Everything Everywhere All At Once" textFill="#4a4a4a" wrapText="true">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <effect>
+                                    <InnerShadow />
+                                 </effect>
+                              </Label>
+                              <VBox prefHeight="62.0" prefWidth="190.0">
+                                 <children>
+                                    <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="420.0" styleClass="confirmLabelDetails" text="₱200" textFill="#4a4a4a">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <effect>
+                                          <InnerShadow />
+                                       </effect>
+                                    </Label>
+                                    <HBox prefHeight="32.0" prefWidth="122.0" styleClass="borderBottom">
+                                       <children>
+                                          <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="48.0" styleClass="confirmLabelDetails" text="x" textFill="#4a4a4a">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                             <effect>
+                                                <InnerShadow />
+                                             </effect>
+                                          </Label>
+                                          <Label fx:id="pticketqty" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="70.0" text="qty" textFill="#4a4a4a">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                             <effect>
+                                                <InnerShadow />
+                                             </effect>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <Label fx:id="totalTicketPrice" alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="186.0" styleClass="confirmLabelDetails" text="total" textFill="#4a4a4a">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <effect>
+                                          <InnerShadow />
+                                       </effect>
+                                    </Label>
+                                 </children></VBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="15.0" layoutY="106.0" prefHeight="93.0" prefWidth="291.0" spacing="10.0">
+                           <children>
+                              <Label fx:id="snackSummary" prefHeight="91.0" prefWidth="323.0" styleClass="confirmLabelDetails" text="SNACKS(S):" textFill="#4a4a4a" wrapText="true">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <effect>
+                                    <InnerShadow />
+                                 </effect>
+                              </Label>
+                              <Label fx:id="totalSnackPrice" alignment="BASELINE_RIGHT" prefHeight="93.0" prefWidth="179.0" styleClass="confirmLabelDetails" text="--" textFill="#4a4a4a">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <effect>
+                                    <InnerShadow />
+                                 </effect>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Label fx:id="totalPriceLabel" alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="291.0" styleClass="borderTop" text="TotalPrice" textFill="#4a4a4a">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </StackPane>
          </children>
       </Pane>
       <Pane fx:id="donePane" layoutY="50.0" prefHeight="698.0" prefWidth="1366.0" style="-fx-background-color: #282827;">
@@ -4028,6 +4389,14 @@
                   <Image url="@../images/booked-successfully.png" />
                </image>
             </ImageView>
+            <Button fx:id="signUpB" layoutX="704.0" layoutY="554.0" mnemonicParsing="false" onMouseClicked="#proceedToStart" prefHeight="51.0" prefWidth="331.0" text="Back to Home">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
          </children></Pane>
       <Pane fx:id="moviePane" layoutY="50.0" prefHeight="698.0" prefWidth="1366.0" style="-fx-background-color: #282827;">
          <children>
@@ -4038,48 +4407,68 @@
             </ImageView>
             <HBox alignment="CENTER" layoutX="276.0" layoutY="186.0" prefHeight="327.0" prefWidth="1084.0" spacing="50.0">
                <children>
-                  <StackPane prefHeight="327.0" prefWidth="216.0" styleClass="moviePoster" stylesheets="@../javacomp/styling.css">
+                  <StackPane prefHeight="327.0" prefWidth="220.0" styleClass="moviePoster" stylesheets="@../javacomp/styling.css">
                      <children>
                         <ImageView fx:id="posterIcon1" fitHeight="320.0" fitWidth="212.0" pickOnBounds="true">
                            <image>
                               <Image url="@../images/pearl%20movie%20poster.jpg" />
                            </image>
                         </ImageView>
-                        <Button fx:id="movieb1" mnemonicParsing="false" onMouseClicked="#selectMovie" onMousePressed="#selectMovieb" opacity="0.0" prefHeight="320.0" prefWidth="264.0" styleClass="seatNo" />
+                        <Button fx:id="movieb1" mnemonicParsing="false" onMouseClicked="#selectMovie" onMouseEntered="#showMovieName" onMouseExited="#hideMovieName" onMousePressed="#selectMovieb" opacity="0.0" prefHeight="320.0" prefWidth="264.0" styleClass="seatNo">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
                      </children>
                   </StackPane>
-                  <StackPane layoutX="501.0" layoutY="10.0" prefHeight="327.0" prefWidth="216.0" styleClass="moviePoster" stylesheets="@../javacomp/styling.css">
+                  <StackPane layoutX="501.0" layoutY="10.0" prefHeight="327.0" prefWidth="220.0" styleClass="moviePoster" stylesheets="@../javacomp/styling.css">
                      <children>
                         <ImageView fx:id="posterIcon2" fitHeight="320.0" fitWidth="212.0" pickOnBounds="true">
                            <image>
                               <Image url="@../images/eeaao.jpg" />
                            </image>
                         </ImageView>
-                        <Button fx:id="movieb2" mnemonicParsing="false" onMouseClicked="#selectMovie" onMousePressed="#selectMovieb" opacity="0.0" prefHeight="320.0" prefWidth="264.0" styleClass="seatNo" />
+                        <Button fx:id="movieb2" mnemonicParsing="false" onMouseClicked="#selectMovie" onMouseEntered="#showMovieName" onMouseExited="#hideMovieName" onMousePressed="#selectMovieb" opacity="0.0" prefHeight="320.0" prefWidth="264.0" styleClass="seatNo">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
                      </children>
                   </StackPane>
-                  <StackPane layoutX="634.0" layoutY="10.0" prefHeight="327.0" prefWidth="216.0" styleClass="moviePoster" stylesheets="@../javacomp/styling.css">
+                  <StackPane layoutX="634.0" layoutY="10.0" prefHeight="327.0" prefWidth="220.0" styleClass="moviePoster" stylesheets="@../javacomp/styling.css">
                      <children>
                         <ImageView fx:id="posterIcon3" fitHeight="320.0" fitWidth="212.0" pickOnBounds="true">
                            <image>
                               <Image url="@../images/nun2poster.png" />
                            </image>
                         </ImageView>
-                        <Button fx:id="movieb3" mnemonicParsing="false" onMouseClicked="#selectMovie" onMousePressed="#selectMovieb" opacity="0.0" prefHeight="320.0" prefWidth="264.0" styleClass="seatNo" />
+                        <Button fx:id="movieb3" mnemonicParsing="false" onMouseClicked="#selectMovie" onMouseEntered="#showMovieName" onMouseExited="#hideMovieName" onMousePressed="#selectMovieb" opacity="0.0" prefHeight="320.0" prefWidth="264.0" styleClass="seatNo">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
                      </children>
                   </StackPane>
-                  <StackPane layoutX="767.0" layoutY="10.0" prefHeight="327.0" prefWidth="216.0" styleClass="moviePoster" stylesheets="@../javacomp/styling.css">
+                  <StackPane layoutX="767.0" layoutY="10.0" prefHeight="327.0" prefWidth="220.0" styleClass="moviePoster" stylesheets="@../javacomp/styling.css">
                      <children>
                         <ImageView fx:id="posterIcon4" fitHeight="320.0" fitWidth="212.0" pickOnBounds="true">
                            <image>
                               <Image url="@../images/onepiece.jpg" />
                            </image>
                         </ImageView>
-                        <Button fx:id="movieb4" mnemonicParsing="false" onMouseClicked="#selectMovie" onMousePressed="#selectMovieb" opacity="0.0" prefHeight="320.0" prefWidth="264.0" styleClass="seatNo" />
+                        <Button fx:id="movieb4" mnemonicParsing="false" onMouseClicked="#selectMovie" onMouseEntered="#showMovieName" onMouseExited="#hideMovieName" onMousePressed="#selectMovieb" opacity="0.0" prefHeight="320.0" prefWidth="264.0" styleClass="seatNo">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
                      </children>
                   </StackPane>
                </children>
             </HBox>
+            <Label fx:id="showMovieTitleLabel" alignment="CENTER" layoutX="315.0" layoutY="562.0" prefHeight="66.0" prefWidth="1012.0" styleClass="moviePosterName" stylesheets="@../javacomp/styling.css" textAlignment="CENTER">
+               <font>
+                  <Font size="40.0" />
+               </font>
+               <effect>
+                  <Glow />
+               </effect>
+            </Label>
          </children></Pane>
    </children>
 </AnchorPane>

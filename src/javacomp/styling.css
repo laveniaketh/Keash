@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bungee+Inline&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Gabarito&display=swap');
 
 
 /*START STYLING*/
@@ -35,6 +35,7 @@
 }
 
 /*MOVIE SELECT STYLING*/
+
 .seatNo{
     -fx-font-size: 15;
     -fx-text-fill: #F2F2F2;
@@ -50,7 +51,13 @@
     -fx-border-color: #FCFCFF;
     -fx-border-width: 3px;
 }
+.moviePosterName{
+     -fx-font-size: 40;
+     -fx-font-family: 'Gabarito', cursive;
+    -fx-text-fill: #20201F;  
+}
 
+/*TIME SELECT STYLING*/
 .timeschedComboBox{
     -fx-font-size: 15;
     -fx-background-color: #FCFCFF;
@@ -81,7 +88,58 @@
     -fx-background-color: #FFD23F;
     -fx-background-radius: 10;
 }
+/*CONFIRM TAB STYLING*/
+.moviePosterSummary{
+    -fx-background-color: #1A1A1A;    
+    -fx-background-radius: 5;
+    -fx-font-size: 12;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: 'Work Sans', sans-serif; 
+    -fx-effect: dropshadow(gaussian, rgba(59, 59, 59, 1), 0,0,0,2 );
+}
+.confirmLabelTitle{
+    -fx-font-size: 20;
+    -fx-background-color: transparent;
+    -fx-font-family: 'Work Sans', sans-serif;
+    -fx-text-fill: #282827;    
+}
+.confirmLabelDetails{
+    -fx-font-size: 15;
+    -fx-background-color: transparent;
+    -fx-font-family: 'Work Sans', sans-serif;
+    -fx-text-fill: #282827;   
+}
+.borderBottom{
+    -fx-font-size: 15;
+    -fx-background-color: transparent;
+    -fx-font-family: 'Work Sans', sans-serif;
+    -fx-text-fill: #282827; 
+    -fx-border-color: #282827; 
+    -fx-border-width: 0 0 2 0;
+}
+.borderTop{
+    -fx-font-size: 15;
+    -fx-background-color: transparent;
+    -fx-font-family: 'Work Sans', sans-serif;
+    -fx-text-fill: #282827; 
+    -fx-border-color: #282827; 
+    -fx-border-width: 2 0 0 0;
+}
 
+/*DONE SYTLING*/
+#backToHomeB{
+    -fx-font-size: 18;
+    -fx-background-color: #FECB53;
+    -fx-font-family: 'Work Sans', sans-serif;
+    -fx-text-fill: #262625;
+    -fx-background-radius: 10; 
+}
+
+
+#backToHomeB:hover{
+  -fx-background-color: #6E6E6D;
+   -fx-text-fill: #FFFF;
+}
 /*ADMIN SYLING*/
 
 .iconLabels{
@@ -101,7 +159,7 @@
     -fx-border: 0px 1px 0px 0px;
     -fx-border-bottom: #30323D 1px;
 }
-.keashLabel{
+.keashLabel1{
     -fx-font-size: 45;
     -fx-background-color: transparent;
     -fx-font-family: 'Bungee Inline', cursive;;
@@ -226,7 +284,7 @@
 /*DASHBOARD TAB*/
 
 .SummaryContainer{
-    -fx-background-color: #494948;    
+    -fx-background-color: #1A1A1A;    
     -fx-background-radius: 10;
     -fx-font-size: 12;
     -fx-text-fill: #FFFFFF;
@@ -245,12 +303,12 @@
     -fx-font-family: 'Bungee Inline', cursive;
 }
 .nowShowingMoviePoster{
-    -fx-background-color: #494948;    
+    -fx-background-color: #1A1A1A;    
     -fx-background-radius: 5;
     -fx-font-size: 12;
     -fx-text-fill: #FFFFFF;
     -fx-font-family: 'Work Sans', sans-serif; 
-    /*-fx-effect: dropshadow(gaussian, rgba(59, 59, 59, 1), 0,0,0,2 );*/  
+    -fx-effect: dropshadow(gaussian, rgba(59, 59, 59, 1), 0,0,0,2 );  
 }
 .nowShowingMoviePoster:hover{
     -fx-text-fill: #FFFFFF;
@@ -259,9 +317,13 @@
 }
 .nowShowingLabel{
     -fx-font-size: 40;
-    -fx-background-color: transparent;
-    -fx-font-family: 'Bungee Inline', cursive;
+    -fx-font-family: 'Work Sans', sans-serif;   
     -fx-text-fill: #FECB53;    
+}
+.moviePosterLabels{
+    -fx-font-size: 15;
+    -fx-font-family: 'Work Sans', sans-serif; 
+    -fx-text-fill: #FFFFFF;    
 }
 
 

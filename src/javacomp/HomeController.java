@@ -1,6 +1,7 @@
 
 package javacomp;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.sql.Blob;
@@ -11,10 +12,17 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
@@ -24,6 +32,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 
 public class HomeController implements Initializable {
@@ -62,6 +71,7 @@ public class HomeController implements Initializable {
     private ImageView seatImg;
     
     ToggleButton s[];
+    ArrayList<ToggleButton> s1 = s1 = new ArrayList<ToggleButton>();
     ImageView ic[];
     
     @FXML
@@ -743,8 +753,6 @@ public class HomeController implements Initializable {
     private Label confirmationPB;
     @FXML
     private Label donePB;
-    @FXML
-    private Spinner<Integer> getTicketqty;
     
     ToggleButton sbButton[];
     ImageView sbImg[];
@@ -805,6 +813,90 @@ public class HomeController implements Initializable {
     private ImageView prevB2;
     @FXML
     private ImageView nextB2;
+    @FXML
+    private ImageView adminB;
+    
+ 
+    
+    Stage stage;
+    Scene scene;
+    Parent root;
+    
+    String[] seatsSelect;
+    String snum;
+    int clickseat;
+    boolean checkseat = true;
+    boolean allowSelectSeat = true;
+    
+    @FXML
+    private ComboBox<?> timeslotComboBox;
+    @FXML
+    private Spinner<Integer> ticketqty;
+    @FXML
+    private Label dialogLabel;
+    @FXML
+    private Spinner<Integer> sbSpinner1;
+    @FXML
+    private Spinner<Integer> sbSpinner2;
+    @FXML
+    private Spinner<Integer> sbSpinner3;
+    @FXML
+    private Spinner<Integer> sbSpinner4;
+    @FXML
+    private Spinner<Integer> sbSoloSpinner1;
+    @FXML
+    private Spinner<Integer> sbSoloSpinner2;
+    @FXML
+    private Spinner<Integer> sbSoloSpinner3;
+    @FXML
+    private Spinner<Integer> sbSoloSpinner4;
+    @FXML
+    private Spinner<Integer> sbSoloSpinner5;
+    @FXML
+    private Spinner<Integer> sbSoloSpinner6;
+    @FXML
+    private Label showMovieTitleLabel;
+    
+    
+    @FXML
+    private ImageView posterConfirm;
+    @FXML
+    private Label movieTitleConfirm;
+    @FXML
+    private Label smovie;
+    @FXML
+    private Label stime;
+    @FXML
+    private Label sticketqty;
+    @FXML
+    private Label ssnacks;
+    @FXML
+    private Label sseats;
+    @FXML
+    private Label pticketqty;
+    @FXML
+    private Label totalTicketPrice;
+    @FXML
+    private Label totalSnackPrice;
+    @FXML
+    private Label totalPriceLabel;
+    
+    ArrayList<String> selectedSnackNames = new ArrayList();
+    ArrayList<Integer> selectedSnackQty = new ArrayList();
+    ArrayList<String> selectedSnackPrice = new ArrayList();
+    ArrayList<Integer> initialPriceList = new ArrayList();
+    ArrayList<String> selectedSnackList = new ArrayList();
+    ArrayList<Integer> seatn = new ArrayList();
+    String slist;
+    int inPrice;
+    int sqty;
+    String sSnack;
+    @FXML
+    private Label snackSummary;
+    @FXML
+    private Label movieP;
+    @FXML
+    private Button signUpB;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -842,9 +934,7 @@ public class HomeController implements Initializable {
         moviePB.setStyle("-fx-font-family: 'Work Sans', sans-serif; -fx-font-size: 20; -fx-text-fill: #FFFFFF;");
 
         
-        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 164);
-        valueFactory.setValue(1);
-	getTicketqty.setValueFactory(valueFactory);
+
         
         
     }
@@ -966,62 +1056,204 @@ public class HomeController implements Initializable {
         }
     }
     
+    void displayTimeSlot(){
+        // display timeslot of the selected movie at the combobox
+        timeslotComboBox.getItems().clear();
+        
+        String ts1,ts2,ts3;
+ 
+        try {
+            ps = Database.connect().prepareStatement("SELECT `Timeslot 1`, `Timeslot 2`, `Timeslot 3` FROM `movielist` WHERE `Title` = ?");
+            ps.setString(1, getMovie());
+            rs = ps.executeQuery();
+            while(rs.next()){
+                ts1 = rs.getString(1);
+                ts2 = rs.getString(2);
+                ts3 = rs.getString(3);
+                
+               ObservableList timeslots = FXCollections.observableArrayList(ts1,ts2,ts3); 
+               timeslotComboBox.setItems(timeslots);
+
+                   
+            }
+                
+        } catch (SQLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        } timeslotComboBox.setPromptText("Select Time");    
+               
+    }
+    
     void setMovie(String mn){
         this.mname = mn;
         
     }
-    @FXML
-    private void selectMovieb(MouseEvent event) {
-        allMovieTitleToArray();
+    
+    String getMovie() {
+        return mname;
+    }
+    
+    void initializeTicketSpinner(){
+        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 164);
+        valueFactory.setValue(1);
+	ticketqty.setValueFactory(valueFactory);      
+    
+    }
+    
+    void initializeMovieB(){
         movieB =  new Button[4];
         movieB[0] = movieb1; movieB[1] = movieb2;
         movieB[2] = movieb3; movieB[3] = movieb4;
+}
+
+    @FXML
+    private void selectMovieb(MouseEvent event) {
+        allMovieTitleToArray();
+        initializeSeats();
+        initializeMovieB();
+        initializeTicketSpinner();
+        
+        s1.clear();
+        clickseat = 0;
+        dialogLabel.setText("");
+        //System.out.println(s1);
         for(int i = 0; i < movieB.length; i++){
            if(movieB[i].isPressed()){
                mname = movieList.get(i);
                setMovie(mname);
+               displayTimeSlot();
+               disableAllSeatButtons();
+               
+               
             }
                 
         }
-        // naa ang methods sa seats na controller
-        //displayTimeSlot(); 
-        //displaySelectMoviePanel();        
     }
 
     @FXML
     private void mouseHoverExit(MouseEvent event) {
+        //seatLimiter();
+        ToggleButton sb =  (ToggleButton) event.getSource();
          for(int x = 0; x < s.length; x++){
-            if(!s[x].isSelected()){
+             if(sb == s[x] && !sb.isSelected() ){
                 Image icon = new Image("/images/chair1.png");
-                ic[x].setImage(icon); 
-            }          
+                ic[x].setImage(icon);                 
+             }         
         }       
     }
 
     @FXML
     private void mouseHoverEntered(MouseEvent event) {
-        for(int x = 0; x < s.length; x++){
-            if(!s[x].isSelected()&& s[x].isHover()){
+        ToggleButton sb =  (ToggleButton) event.getSource();
+         for(int x = 0; x < s.length; x++){
+             if(sb == s[x] ){
                 Image icon = new Image("/images/chairw.png");
-                ic[x].setImage(icon); 
-            }           
+                ic[x].setImage(icon);                 
+             }         
         }       
     }
+    
+
 
     @FXML
     private void selectSeat(ActionEvent event) {
-        for(int x = 0; x < s.length; x++){
-            if(s[x].isSelected()){
-                //System.out.println("select seat" + (x+1));
-                Image icon = new Image("/images/chairw.png");
-                ic[x].setImage(icon); 
+        dialogLabel.setText("");
+        ToggleButton sb =  (ToggleButton) event.getSource();
+        unselectSelectedSeat(sb);
+        seatLimiter(event);
+        
+        if(checkseat){
+            clickseat--;
+            if(sb.isSelected()){
+                clickseat++;
+                //System.out.println("seatSelect clickss : " +clickseat);
+                for(int x = 0; x < s.length; x++){
+                    if(sb == s[x]) {
+                        getSelectedSeat(sb ,event);
+                        seatn.add( x + 1);
+                        Image icon = new Image("/images/chairw.png");
+                        ic[x].setImage(icon);
+                    }           
+                }
+
             }
-            else if(!s[x].isSelected()){
-                Image icon = new Image("/images/chair1.png");
-                ic[x].setImage(icon); 
-            }            
-        }       
+      
+        }           
+            
+        
     }
+    
+
+    
+    void getSelectedSeat(ToggleButton s, ActionEvent e){    
+        s1.add(s);
+        //System.out.println("SELECTED SEATS New : " + s1);
+        ToggleButton sb =  (ToggleButton) e.getSource();
+            
+          
+        
+    }
+    
+    void unselectSelectedSeat(ToggleButton sb){
+        for(int i = 0; i < s1.size();i++ ){
+            if(sb == s1.get(i)){
+                if(!sb.isSelected()){                  
+                    for(int x = 0; x < s.length; x++){
+                        if(sb == s[x]) {
+                            Image icon = new Image("/images/chair1.png");
+                            ic[x].setImage(icon);
+                        }
+
+                    }                  
+                    //System.out.println("get selected seat REMOVED  : " + s1.get(i));
+                    s1.remove(i);
+                    seatn.remove(i);
+                    //System.out.println("SELECTED SEATS Update : " + s1);
+                    clickseat--;
+                    //System.out.println("get selected seat removed clicksss  : " +clickseat);          
+                }
+            }                  
+        }
+    }
+
+   
+        void seatLimiter(ActionEvent event){
+            clickseat++;
+            if(clickseat > ticketqty.getValue()){
+                ToggleButton sb =  (ToggleButton) event.getSource();
+                 sb.setSelected(false);
+                 clickseat--; 
+                 //System.out.println("seatLimiter clickss : " +clickseat);
+                  dialogLabel.setText("Seat quantity exceeded.");
+                //System.out.println("already exceeded selection");
+                checkseat = false; 
+            }
+            else {
+                checkseat = true;
+                //clickseat--;
+            } 
+                
+            
+        
+
+    }
+        void disableSeat(){
+            for(int x = 0; x < s.length; x++){
+                if(!s[x].isSelected()){
+                    s[x].setDisable(true);
+                    allowSelectSeat = false;
+                }
+                else if(s[x].isSelected()){
+                    s[x].setDisable(false);
+                    allowSelectSeat = true;
+                }
+            }
+        }
+        
+        void disableAllSeatButtons(){
+            for(int x = 0; x < s.length; x++){
+                s[x].setDisable(true);
+            }
+        }
 
     @FXML
     private void prevBMouseExited(MouseEvent event) {
@@ -1058,7 +1290,7 @@ public class HomeController implements Initializable {
 
     @FXML
     private void selectMovie(MouseEvent event) {
-        initializeSeats();
+        
         timePane.toFront();
         moviePB.setStyle("-fx-font-family: 'Work Sans', sans-serif; -fx-font-size: 20; -fx-text-fill: #6E6E6D;");
         timePB.setStyle("-fx-font-family: 'Work Sans', sans-serif; -fx-font-size: 20; -fx-text-fill: #FFFFFF;");
@@ -1066,6 +1298,7 @@ public class HomeController implements Initializable {
 
     @FXML
     private void backToMovieSelect(MouseEvent event) {
+        //timeslotComboBox.getItems().clear();
         moviePane.toFront();
         timePB.setStyle("-fx-font-family: 'Work Sans', sans-serif; -fx-font-size: 20; -fx-text-fill: #6E6E6D;");
         moviePB.setStyle("-fx-font-family: 'Work Sans', sans-serif; -fx-font-size: 20; -fx-text-fill: #FFFFFF;");        
@@ -1216,24 +1449,326 @@ public class HomeController implements Initializable {
             }
         }     
     }
+    
+
 
     @FXML
     private void proceedToSnack(MouseEvent event) {
-        snackbarpane.toFront();
-        timePB.setStyle("-fx-font-family: 'Work Sans', sans-serif; -fx-font-size: 20; -fx-text-fill: #6E6E6D;");
-        snackPB.setStyle("-fx-font-family: 'Work Sans', sans-serif; -fx-font-size: 20; -fx-text-fill: #FFFFFF;"); 
+        selectedSnackList.clear();
+        selectedSnackNames.clear();
+        selectedSnackPrice.clear();
+                System.out.println("snacks price:  " + selectedSnackNames);
+    System.out.println("snacks price:  " + selectedSnackPrice);
+        if(clickseat == ticketqty.getValue()){
+            snackbarpane.toFront();
+            disableAllSnackCBSpinner();
+            disableAllSnackSoloSpinner();
+            for(int x = 0; x < sbButton.length; x++){
+                sbButton[x].setSelected(false);
+                    if(x == 0){
+                        Image icon = new Image("/images/KC1.png");
+                        sbImg[x].setImage(icon);
+                    }
+                    else if( x == 1){
+                        Image icon = new Image("/images/KC2.png");
+                        sbImg[x].setImage(icon);                 
+                    }
+                    else if(x == 2){
+                        Image icon = new Image("/images/KC3.png");
+                        sbImg[x].setImage(icon);                   
+                    }
+                    else if(x == 3){
+                        Image icon = new Image("/images/KC4.png");
+                        sbImg[x].setImage(icon);                    
+                    }
+            }
+        for(int i = 0; i < sbSoloButton.length; i++){
+          sbSoloButton[i].setSelected(false);
+                if(i == 0){
+                    Image icon = new Image("/images/soda.png");
+                    sbSoloImg[i].setImage(icon);
+                    sbSoloImg[i].setFitWidth(100);
+                    sbSoloImg[i].setFitHeight(100);
+                }
+                else if(i == 1){
+                    Image icon = new Image("/images/iced-tea.png");
+                    sbSoloImg[i].setImage(icon);  
+                    sbSoloImg[i].setFitWidth(100);
+                    sbSoloImg[i].setFitHeight(100);
+                }
+                else if (i == 2){
+                    Image icon = new Image("/images/water-bottle.png");
+                    sbSoloImg[i].setImage(icon);
+                    sbSoloImg[i].setFitWidth(100);
+                    sbSoloImg[i].setFitHeight(100);
+                }
+                else if(i == 3){
+                    Image icon = new Image("/images/popcorn.png");
+                    sbSoloImg[i].setImage(icon);
+                    sbSoloImg[i].setFitWidth(100);
+                    sbSoloImg[i].setFitHeight(100);
+                }
+                else if(i == 4){
+                    Image icon = new Image("/images/chocolate-bar.png");
+                    sbSoloImg[i].setImage(icon);
+                    sbSoloImg[i].setFitWidth(100);
+                    sbSoloImg[i].setFitHeight(100);
+                }
+                else if(i == 5){
+                    Image icon = new Image("/images/cupcake.png");
+                    sbSoloImg[i].setImage(icon);
+                    sbSoloImg[i].setFitWidth(100);
+                    sbSoloImg[i].setFitHeight(100);
+                }
+            
+        }           
+            
+            timePB.setStyle("-fx-font-family: 'Work Sans', sans-serif; -fx-font-size: 20; -fx-text-fill: #6E6E6D;");
+            snackPB.setStyle("-fx-font-family: 'Work Sans', sans-serif; -fx-font-size: 20; -fx-text-fill: #FFFFFF;");
+        }
+        else if (clickseat < ticketqty.getValue()){
+            dialogLabel.setText("Select " + (ticketqty.getValue() - clickseat) + " more seat(s)");
+        }
+
     }
 
     @FXML
     private void backToTimeSelect(MouseEvent event) {
         timePane.toFront();
+        selectedSnackList.clear();
+        selectedSnackNames.clear();
+        selectedSnackPrice.clear();
+        ssnacks.setText("");
+        //initializeTicketSpinner(); 
         snackPB.setStyle("-fx-font-family: 'Work Sans', sans-serif; -fx-font-size: 20; -fx-text-fill: #6E6E6D;");
         timePB.setStyle("-fx-font-family: 'Work Sans', sans-serif; -fx-font-size: 20; -fx-text-fill: #FFFFFF;");
     }
+ 
+    void setSelectedSnacks(){
+        selectedSnackList.clear();
+        System.out.println("snacks name:  " + selectedSnackNames);
+    System.out.println("snacks price:  " + selectedSnackPrice);
+
+
+    for(int x = 0; x <selectedSnackNames.size();x++ ){
+        if(selectedSnackNames.get(x) == "SC1"){
+           sqty = sbSpinner1.getValue();
+           inPrice = sqty * Integer.parseInt(selectedSnackPrice.get(x));
+           initialPriceList.add(inPrice);
+           sSnack = String.valueOf(sqty)+"pc " +selectedSnackNames.get(x);
+           selectedSnackList.add(sSnack);
+        }
+        else if(selectedSnackNames.get(x) == "SC2"){
+            sqty = sbSpinner2.getValue();
+            inPrice = sqty * Integer.parseInt(selectedSnackPrice.get(x));
+            initialPriceList.add(inPrice);
+           sSnack = String.valueOf(sqty)+"pc " +selectedSnackNames.get(x);
+           selectedSnackList.add(sSnack);            
+        }
+        else if(selectedSnackNames.get(x) == "SC3"){
+            sqty = sbSpinner3.getValue();
+            inPrice = sqty * Integer.parseInt(selectedSnackPrice.get(x));
+            initialPriceList.add(inPrice); 
+           sSnack = String.valueOf(sqty)+"pc " +selectedSnackNames.get(x);
+           selectedSnackList.add(sSnack);
+        }       
+        else if(selectedSnackNames.get(x) == "SC4"){
+            sqty = sbSpinner4.getValue();
+            inPrice = sqty * Integer.parseInt(selectedSnackPrice.get(x));
+            initialPriceList.add(inPrice); 
+           sSnack = String.valueOf(sqty)+"pc " +selectedSnackNames.get(x);
+           selectedSnackList.add(sSnack);           
+        }
+        else if(selectedSnackNames.get(x) == "Coke"){
+            sqty = sbSoloSpinner1.getValue();
+            inPrice = sqty * Integer.parseInt(selectedSnackPrice.get(x));
+            initialPriceList.add(inPrice);
+           sSnack = String.valueOf(sqty)+"pc " +selectedSnackNames.get(x);
+           selectedSnackList.add(sSnack);
+        }
+        else if(selectedSnackNames.get(x) == "Ice Tea"){
+            sqty = sbSoloSpinner2.getValue();
+            inPrice = sqty * Integer.parseInt(selectedSnackPrice.get(x));
+            initialPriceList.add(inPrice);
+           sSnack = String.valueOf(sqty)+"pc " +selectedSnackNames.get(x);
+           selectedSnackList.add(sSnack);           
+        }
+        else if(selectedSnackNames.get(x) == "Water Bottle"){
+            sqty = sbSoloSpinner3.getValue();
+            inPrice = sqty * Integer.parseInt(selectedSnackPrice.get(x));
+            initialPriceList.add(inPrice);
+           sSnack = String.valueOf(sqty)+"pc " +selectedSnackNames.get(x);
+           selectedSnackList.add(sSnack);
+        }
+        else if(selectedSnackNames.get(x) == "PopCorn"){
+            sqty = sbSoloSpinner4.getValue();
+            inPrice = sqty * Integer.parseInt(selectedSnackPrice.get(x));
+            initialPriceList.add(inPrice);
+           sSnack = String.valueOf(sqty)+"pc " +selectedSnackNames.get(x);
+           selectedSnackList.add(sSnack);
+        }
+        else if(selectedSnackNames.get(x) == "Choco Bar"){
+            sqty = sbSoloSpinner5.getValue();
+            inPrice = sqty * Integer.parseInt(selectedSnackPrice.get(x));
+            initialPriceList.add(inPrice);
+           sSnack = String.valueOf(sqty)+"pc " +selectedSnackNames.get(x);
+           selectedSnackList.add(sSnack);
+        }
+        else if(selectedSnackNames.get(x) == "Cupcake"){
+            sqty = sbSoloSpinner6.getValue();
+            inPrice = sqty * Integer.parseInt(selectedSnackPrice.get(x));
+            initialPriceList.add(inPrice);
+           sSnack = String.valueOf(sqty)+"pc " +selectedSnackNames.get(x);
+           selectedSnackList.add(sSnack);
+        }
+    }
+    slist = "";
+    for(int x = 0;x < selectedSnackList.size(); x++){
+        slist += selectedSnackList.get(x) + ", ";
+        System.out.println(slist);
+           }
+    ssnacks.setText(slist);
+    snackSummary.setText(slist);
+        
+    System.out.println(selectedSnackList);
+    
+    
+
+    }
+
+    
+    void paymentDetails(){
+        totalTicketPrice.setText("");
+        totalSnackPrice.setText("");
+        totalPriceLabel.setText("");
+        ArrayList<Integer> initTotalSnack = new ArrayList();
+        int ticketTotal;
+        int snackTotal = 0;
+        int total;
+        int initsnack;
+        pticketqty.setText(String.valueOf(ticketqty.getValue()));
+        if(selectedSnackNames != null){
+            setSelectedSnacks();
+            for(int x = 0; x <selectedSnackNames.size();x++ ){
+                if(selectedSnackNames.get(x) == "SC1"){
+                   sqty = sbSpinner1.getValue();
+                   initsnack = Integer.parseInt(selectedSnackPrice.get(x)) *  sqty;
+                   initTotalSnack.add(initsnack);
+                }
+                else if(selectedSnackNames.get(x) == "SC2"){
+                   sqty = sbSpinner2.getValue();
+                   initsnack = Integer.parseInt(selectedSnackPrice.get(x)) *  sqty;
+                   initTotalSnack.add(initsnack);            
+                }
+                else if(selectedSnackNames.get(x) == "SC3"){
+                   sqty = sbSpinner3.getValue();
+                   initsnack = Integer.parseInt(selectedSnackPrice.get(x)) *  sqty;
+                   initTotalSnack.add(initsnack);
+                }       
+                else if(selectedSnackNames.get(x) == "SC4"){
+                   sqty = sbSpinner4.getValue();
+                   initsnack = Integer.parseInt(selectedSnackPrice.get(x)) *  sqty;
+                   initTotalSnack.add(initsnack);          
+                }
+                else if(selectedSnackNames.get(x) == "Coke"){
+                   sqty = sbSoloSpinner1.getValue();
+                   initsnack = Integer.parseInt(selectedSnackPrice.get(x)) *  sqty;
+                   initTotalSnack.add(initsnack);
+                }
+                else if(selectedSnackNames.get(x) == "Ice Tea"){
+                   sqty = sbSoloSpinner2.getValue();
+                   initsnack = Integer.parseInt(selectedSnackPrice.get(x)) *  sqty;
+                   initTotalSnack.add(initsnack);          
+                }
+                else if(selectedSnackNames.get(x) == "Water Bottle"){
+                   sqty = sbSoloSpinner3.getValue();
+                   initsnack = Integer.parseInt(selectedSnackPrice.get(x)) *  sqty;
+                   initTotalSnack.add(initsnack);
+                }
+                else if(selectedSnackNames.get(x) == "PopCorn"){
+                   sqty = sbSoloSpinner4.getValue();
+                   initsnack = Integer.parseInt(selectedSnackPrice.get(x)) *  sqty;
+                   initTotalSnack.add(initsnack);;
+                }
+                else if(selectedSnackNames.get(x) == "Choco Bar"){
+                    sqty = sbSoloSpinner5.getValue();
+                   initsnack = Integer.parseInt(selectedSnackPrice.get(x)) *  sqty;
+                   initTotalSnack.add(initsnack);
+                }
+                else if(selectedSnackNames.get(x) == "Cupcake"){
+                    sqty = sbSoloSpinner6.getValue();
+                   initsnack = Integer.parseInt(selectedSnackPrice.get(x)) *  sqty;
+                   initTotalSnack.add(initsnack);
+                }
+            }
+            for(int i = 0; i <selectedSnackNames.size();i++ ){
+                snackTotal += initTotalSnack.get(i);
+            }
+            ticketTotal = 200 * ticketqty.getValue();
+            total = snackTotal + ticketTotal;
+            movieP.setText(getMovie());
+            totalTicketPrice.setText("₱" + String.valueOf(ticketTotal));
+            totalSnackPrice.setText("₱" + String.valueOf(snackTotal));
+            totalPriceLabel.setText("TOTAL : ₱" + String.valueOf(total));
+        }
+        else{
+            ticketTotal = 200 * ticketqty.getValue();
+            movieP.setText(getMovie());
+            snackSummary.setText("SNACKS(S):");
+            totalPriceLabel.setText("TOTAL : ₱" + String.valueOf(ticketTotal));
+        }
+    }
+    
+    void setSummaryDetails(){
+        movieTitleConfirm.setText(getMovie());      
+        String m = getMovie();
+        String s = "";
+        String t = (String) timeslotComboBox.getValue();
+        int tqty = ticketqty.getValue();
+        if(selectedSnackNames != null){
+           setSelectedSnacks();
+        }
+
+        
+        try {
+            ps = Database.connect().prepareStatement("SELECT `Poster` FROM `movielist` WHERE `Title`=?");
+                ps.setString(1, m);
+                rs = ps.executeQuery();
+                while(rs.next()){
+                    blob = rs.getBlob(1);
+                    in = blob.getBinaryStream(); 
+                    img = new Image(in);
+                    posterConfirm.setImage(img); 
+                }
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for(int x = 0; x < seatn.size(); x++){
+             s += "S" + (String.valueOf(seatn.get(x) + ", "));
+        }
+        sseats.setText(s);
+        smovie.setText(m);
+        stime.setText(t);
+        sticketqty.setText(String.valueOf(tqty));
+        
+            
+        
+        
+        
+
+    }
+    
+
+    
+    
 
     @FXML
     private void proceedToConfirm(MouseEvent event) {
+        setSummaryDetails();
+        paymentDetails();
         confirmpane.toFront();
+        
         snackPB.setStyle("-fx-font-family: 'Work Sans', sans-serif; -fx-font-size: 20; -fx-text-fill: #6E6E6D;");
         confirmationPB.setStyle("-fx-font-family: 'Work Sans', sans-serif; -fx-font-size: 20; -fx-text-fill: #FFFFFF;");        
     }
@@ -1370,12 +1905,407 @@ public class HomeController implements Initializable {
         confirmationPB.setStyle("-fx-font-family: 'Work Sans', sans-serif; -fx-font-size: 20; -fx-text-fill: #6E6E6D;");
         snackPB.setStyle("-fx-font-family: 'Work Sans', sans-serif; -fx-font-size: 20; -fx-text-fill: #FFFFFF;");
     }
+    
+    void insertTicketTransactionToDatabase(){
+        for(int i = 0; i < ticketqty.getValue(); i++){
+            String m = getMovie();
+            String t = String.valueOf(timeslotComboBox.getValue());
+            int s = seatn.get(i);
+            try {
+                ps = Database.connect().prepareStatement("INSERT INTO `ticketlist`(`Title`, `Time`, `Seat no.`) VALUES (?,?,?)");
+                ps.setString(1, m);
+                ps.setString(2, t);
+                ps.setInt(3, s);
+                ps.executeUpdate();
+            } catch (SQLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
+        }
+    }
 
     @FXML
     private void proceedToDone(MouseEvent event) {
         donePane.toFront();
+        insertTicketTransactionToDatabase();
         confirmationPB.setStyle("-fx-font-family: 'Work Sans', sans-serif; -fx-font-size: 20; -fx-text-fill: #6E6E6D;");
         donePB.setStyle("-fx-font-family: 'Work Sans', sans-serif; -fx-font-size: 20; -fx-text-fill: #FFFFFF;");       
     }
+
+    @FXML
+    private void adminBMouseHoverEnter(MouseEvent event) {
+        Image icon = new Image("/images/adminB-hover.png");
+        adminB.setImage(icon);      
+    }
+
+    @FXML
+    private void adminBMouseHoverExit(MouseEvent event) {
+        Image icon = new Image("/images/adminB.png");
+        adminB.setImage(icon);       
+    }
+
+    @FXML
+    private void proceedToLoginPage(MouseEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/scenes/Login.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+
+        Image icon = new Image("/images/keash-logo.png");
+        stage.getIcons().add(icon); 
+        stage.setTitle("Keash");
+                    
+        stage.setMaximized(true);
+        stage.setWidth(1366);
+        stage.setHeight(738);
+        
+        String css = this.getClass().getResource("styling.css").toExternalForm();
+        scene.getStylesheets().add(css);
+            
+        stage.setScene(scene);
+        stage.show();       
+    }
+
+    @FXML
+    private void checkAvailSeats(ActionEvent event) {
+        //disable reserve seats
+        enableAllButtons();
+        if(timeslotComboBox.getValue() != null){
+            reserveSeat();
+            clickseat = 0;
+            s1.clear();
+//            System.out.println("check");
+        }     
+    }
+
+    void reserveSeat(){
+        // to disable seats that are already reserved/booked
+        int reserveSeat;
+        String rmovie = getMovie();        
+        String rtime = (String) timeslotComboBox.getValue();
+        initializeTicketSpinner(); 
+
+        
+        try {
+            ps = Database.connect().prepareStatement(" SELECT `Seat No.` FROM `ticketlist` WHERE `Title` = ? AND `Time` = ?");
+            ps.setString(1, rmovie);
+            ps.setString(2, rtime);
+            rs = ps.executeQuery();
+            while(rs.next() == true){
+                reserveSeat = rs.getInt(1);
+//                System.out.println(reserveSeat);
+                for(int x = 0; x < s.length; x++){
+                    if(reserveSeat == (x +1)){
+                        s[x].setDisable(true);
+                        
+                        Image icon = new Image("/images/chairReserve.png");
+                        ic[x].setImage(icon);
+                    }
+                }
+                
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
+    void enableAllButtons(){
+        //to enable all buttons for resetting
+        for(int x = 0; x < s.length; x++){
+            s[x].setDisable(false);
+            Image icon = new Image("/images/chair1.png");
+            ic[x].setImage(icon);          
+        }
+    
+
+    }
+
+    @FXML
+    private void getTicketQty(MouseEvent event) {
+        dialogLabel.setText("");
+        //System.out.println("ticket qty: " + ticketqty.getValue());
+              
+    }
+    
+    void disableAllSnackCBSpinner(){
+        sbSpinner1.setDisable(true);
+        sbSpinner2.setDisable(true);
+        sbSpinner3.setDisable(true);
+        sbSpinner4.setDisable(true);
+    }
+    void disableAllSnackSoloSpinner(){
+        sbSoloSpinner1.setDisable(true);
+        sbSoloSpinner2.setDisable(true);
+        sbSoloSpinner3.setDisable(true);
+        sbSoloSpinner4.setDisable(true);
+        sbSoloSpinner5.setDisable(true);
+        sbSoloSpinner6.setDisable(true);
+    }
+
+    @FXML
+    private void selectComboSnack(MouseEvent event) {
+        ToggleButton sb =  (ToggleButton) event.getSource();
+        String snackcbn;
+        int snackqty;
+        int sprice;
+        for(int x = 0; x < sbButton.length; x++){
+             if(sb == sbButton[x] && sb.isSelected()){
+               if(x == 0){
+                    sbSpinner1.setDisable(false);
+                    SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 164);
+                    valueFactory.setValue(1);
+                    sbSpinner1.setValueFactory(valueFactory);
+                    snackcbn = "SC1";
+                    snackqty = sbSpinner1.getValue();
+                    sprice = 129;
+                    selectedSnackNames.add(snackcbn);
+                    selectedSnackPrice.add(String.valueOf(sprice));                   
+                }
+                else if(x == 1){
+                    sbSpinner2.setDisable(false);
+                    SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 164);
+                    valueFactory.setValue(1);
+                    sbSpinner2.setValueFactory(valueFactory);
+                    snackcbn = "SC2";
+                    snackqty = sbSpinner2.getValue();
+                    sprice = 149;
+                    selectedSnackNames.add(snackcbn);
+                     selectedSnackPrice.add(String.valueOf(sprice)); 
+                }
+                else if(x ==2){
+                    sbSpinner3.setDisable(false);
+                    SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 164);
+                    valueFactory.setValue(1);
+                    sbSpinner3.setValueFactory(valueFactory); 
+                    snackcbn = "SC3";
+                    snackqty = sbSpinner3.getValue();
+                    sprice = 119;
+                    selectedSnackNames.add(snackcbn);
+                    selectedSnackPrice.add(String.valueOf(sprice)); 
+                }
+                else if(x ==3){
+                    sbSpinner4.setDisable(false);
+                    SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 164);
+                    valueFactory.setValue(1);
+                    sbSpinner4.setValueFactory(valueFactory); 
+                    snackcbn = "SC4";
+                    snackqty = sbSpinner4.getValue();
+                    sprice = 139;
+                    selectedSnackNames.add(snackcbn);
+                    selectedSnackPrice.add(String.valueOf(sprice)); 
+ 
+                }
+            }
+            else if(sb == sbButton[x] && !sb.isSelected()){
+                if(x == 0){
+                  sbSpinner1.setDisable(true);
+                    selectedSnackNames.remove("SC1");
+                    selectedSnackPrice.remove("129"); 
+                }
+                else if(x == 1){
+                    sbSpinner2.setDisable(true);
+                    selectedSnackNames.remove("SC2");
+                    selectedSnackPrice.remove("149"); 
+                }
+                else if(x == 2){
+                    sbSpinner3.setDisable(true);
+                    selectedSnackNames.remove("SC3");
+                    selectedSnackPrice.remove("119");                   
+                }
+                else if(x == 3){
+                    sbSpinner4.setDisable(true);
+                    selectedSnackNames.remove("SC4");
+                    selectedSnackPrice.remove("139");                    
+                }
+                
+            }               
+            }
+        System.out.println("snacks:  " + selectedSnackNames);
+   System.out.println("snacks price:  " + selectedSnackPrice);
+
+    }
+
+    @FXML
+    private void selectSnackSolo(MouseEvent event) {
+        ToggleButton sb =  (ToggleButton) event.getSource();
+        //String selectedSnacks[][] = new String[][]{};
+        String snackSolon;
+        int snackqty;
+        int sprice;
+        for(int x = 0; x < sbSoloButton.length; x++){          
+            if(sb == sbSoloButton[x] && sb.isSelected()){
+                if(x == 0){
+                   sbSoloSpinner1.setDisable(false);
+                    SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 164);
+                    valueFactory.setValue(1);
+                    sbSoloSpinner1.setValueFactory(valueFactory);
+                    snackSolon = "Coke";
+                    snackqty = sbSoloSpinner1.getValue();
+                    sprice = 30;
+                    selectedSnackNames.add(snackSolon);
+                    selectedSnackQty.add(snackqty);
+                    selectedSnackPrice.add(String.valueOf(sprice));
+                            
+                }
+                else if(x == 1){
+                   sbSoloSpinner2.setDisable(false);
+                    SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 164);
+                    valueFactory.setValue(1);
+                    sbSoloSpinner2.setValueFactory(valueFactory);
+                    snackSolon = "Ice Tea";
+                    snackqty = sbSoloSpinner2.getValue();
+                    sprice = 45;
+                    selectedSnackNames.add(snackSolon);
+                    selectedSnackQty.add(snackqty);
+                    selectedSnackPrice.add(String.valueOf(sprice));                  
+                    
+                }
+                else if(x == 2){
+                   sbSoloSpinner3.setDisable(false);
+                    SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 164);
+                    valueFactory.setValue(1);
+                    sbSoloSpinner3.setValueFactory(valueFactory);
+                    snackSolon = "Water Bottle";
+                    snackqty = sbSoloSpinner3.getValue();
+                    sprice = 25;
+                    selectedSnackNames.add(snackSolon);
+                    selectedSnackQty.add(snackqty);
+                    selectedSnackPrice.add(String.valueOf(sprice));                   
+                }
+                else if(x ==3){
+                   sbSoloSpinner4.setDisable(false);
+                    SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 164);
+                    valueFactory.setValue(1);
+                    sbSoloSpinner4.setValueFactory(valueFactory);
+                    snackSolon = "PopCorn";
+                    snackqty = sbSoloSpinner4.getValue();
+                    sprice = 50;
+                    selectedSnackNames.add(snackSolon);
+                    selectedSnackQty.add(snackqty);
+                    selectedSnackPrice.add(String.valueOf(sprice));                    
+                }
+                else if(x == 4){
+                   sbSoloSpinner5.setDisable(false);
+                    SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 164);
+                    valueFactory.setValue(1);
+                    sbSoloSpinner5.setValueFactory(valueFactory);
+                    snackSolon = "Choco Bar";
+                    snackqty = sbSoloSpinner5.getValue();
+                    sprice = 15;
+                    selectedSnackNames.add(snackSolon);
+                    selectedSnackQty.add(snackqty);
+                    selectedSnackPrice.add(String.valueOf(sprice));                   
+                }
+                else if(x == 5){
+                   sbSoloSpinner6.setDisable(false);
+                    SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 164);
+                    valueFactory.setValue(1);
+                    sbSoloSpinner6.setValueFactory(valueFactory); 
+                    snackSolon = "Cupcake";
+                    snackqty = sbSoloSpinner6.getValue();
+                    sprice = 10;
+                    selectedSnackNames.add(snackSolon);
+                    selectedSnackQty.add(snackqty);
+                    selectedSnackPrice.add(String.valueOf(sprice));                  
+                }
+
+                }
+            else if(sb == sbSoloButton[x] && !sb.isSelected()){
+                  if(x == 0){                     
+                  sbSoloSpinner1.setDisable(true);
+                    selectedSnackNames.remove("Coke");
+                    selectedSnackPrice.remove("30");                 
+                }
+                else if(x == 1){
+                    sbSoloSpinner2.setDisable(true);
+                    selectedSnackNames.remove("Ice Tea");
+                    selectedSnackPrice.remove("45");                     
+                }
+                else if(x == 2){
+                    sbSoloSpinner3.setDisable(true);
+                    selectedSnackNames.remove("Water Bottle");
+                    selectedSnackPrice.remove("25");                     
+                }
+                else if(x == 3){
+                    sbSoloSpinner4.setDisable(true);
+                    selectedSnackNames.remove("PopCorn");
+                    selectedSnackPrice.remove("50");                     
+                }
+                else if(x == 4){
+                    sbSoloSpinner5.setDisable(true);
+                    selectedSnackNames.remove("Choco Bar");
+                    selectedSnackPrice.remove("15");  
+                }
+                else if(x == 5){
+                    sbSoloSpinner6.setDisable(true);
+                    selectedSnackNames.remove("Cupcake");
+                    selectedSnackPrice.remove("10");  
+                }
+            
+            }
+        
+                
+                    
+   }System.out.println("snacks:  " + selectedSnackNames);
+   System.out.println("snacks price:  " + selectedSnackPrice);
+                          
+    }
+
+    @FXML
+    private void hideMovieName(MouseEvent event) {
+        showMovieTitleLabel.setText("");
+
+        
+    }
+
+    @FXML
+    private void showMovieName(MouseEvent event) {
+        allMovieTitleToArray();
+        Button b = ((Button) event.getSource());
+            if(b == movieb1){
+                showMovieTitleLabel.setText(  movieList.get(0) +" ₱200");
+            }
+            else if(b == movieb2){
+                showMovieTitleLabel.setText(  movieList.get(1) +" ₱200");
+            }
+            else if(b == movieb3){
+                showMovieTitleLabel.setText(  movieList.get(2) +" ₱200");
+            }
+            else if(b == movieb4){
+                showMovieTitleLabel.setText(  movieList.get(3) +" ₱200");
+            }           
+               
+    }
+
+    @FXML
+    private void proceedToStart(MouseEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/scenes/Start.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+
+        Image icon = new Image("/images/keash-logo.png");
+        stage.getIcons().add(icon); 
+        stage.setTitle("Keash");
+                    
+        stage.setMaximized(true);
+        stage.setWidth(1366);
+        stage.setHeight(738);
+        
+        String css = this.getClass().getResource("styling.css").toExternalForm();
+        scene.getStylesheets().add(css);
+            
+        stage.setScene(scene);
+        stage.show();       
+    }
+
+      
 }
+
+
+
+
+        
+    
+    
+    

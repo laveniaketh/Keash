@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #282827;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javacomp.LoginController">
+<AnchorPane id="AnchorPane" prefHeight="738.0" prefWidth="1366.0" style="-fx-background-color: #282827;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javacomp.LoginController">
     <stylesheets>
         <URL value="@/javacomp/styling.css" />
     </stylesheets>
@@ -25,7 +25,7 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="96.0" prefWidth="630.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="66.0" prefWidth="632.0" styleClass="keashLabel" stylesheets="@../javacomp/styling.css" text="WELCOME TO KEASH" textFill="WHITE">
+                        <Label alignment="CENTER" prefHeight="66.0" prefWidth="632.0" styleClass="keashLabel1" stylesheets="@../javacomp/styling.css" text="WELCOME TO KEASH" textFill="WHITE">
                            <font>
                               <Font size="39.0" />
                            </font>
@@ -56,7 +56,7 @@
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Label>
-                        <Button fx:id="signInB" mnemonicParsing="false" stylesheets="@../javacomp/styling.css" text="Sign In">
+                        <Button fx:id="signInB" mnemonicParsing="false" onMouseClicked="#proceedToHoome" stylesheets="@../javacomp/styling.css" text="Sign In">
                            <font>
                               <Font size="19.0" />
                            </font>
@@ -136,7 +136,7 @@
             </VBox>
          </children>
       </StackPane>
-      <ImageView fitHeight="768.0" fitWidth="641.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="738.0" fitWidth="641.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/login-bg.png" />
          </image>

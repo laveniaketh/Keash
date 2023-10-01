@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="738.0" prefWidth="1366.0" style="-fx-background-color: #282827;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javacomp.AdminController">
+<AnchorPane id="AnchorPane" prefHeight="738.0" prefWidth="1366.0" style="-fx-background-color: #282827;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javacomp.AdminController">
     <stylesheets>
         <URL value="@/javacomp/styling.css" />
     </stylesheets>
@@ -107,13 +107,14 @@
             </StackPane>
          </children>
       </VBox>
+      <Pane fx:id="customerPane" layoutX="78.0" prefHeight="738.0" prefWidth="1289.0" style="-fx-background-color: #282827;" />
       <Pane fx:id="editScreeningPane" layoutX="78.0" prefHeight="738.0" prefWidth="1289.0" style="-fx-background-color: #282827;" styleClass="editScreeningComp" stylesheets="@../javacomp/styling.css">
          <children>
             <SplitPane dividerPositions="0.55" prefHeight="738.0" prefWidth="1289.0" style="-fx-background-color: #282827;">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="738.0" prefWidth="653.0">
                      <children>
-                        <VBox layoutX="38.0" layoutY="235.0" prefHeight="467.0" prefWidth="422.0" style="-fx-background-color: #333333; -fx-background-radius: 10;" stylesheets="@../javacomp/styling.css">
+                        <VBox layoutX="38.0" layoutY="235.0" prefHeight="467.0" prefWidth="422.0" style="-fx-background-color: #20201F; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(59, 59, 59, 1), 0,0,0,2 );;" stylesheets="@../javacomp/styling.css">
                            <children>
                               <HBox alignment="CENTER_RIGHT" prefHeight="86.0" prefWidth="421.0" spacing="20.0">
                                  <children>
@@ -132,7 +133,7 @@
                               </HBox>
                               <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="50.0" prefWidth="200.0" spacing="20.0">
                                  <children>
-                                    <Label styleClass="editScreeningComp" stylesheets="@../javacomp/styling.css" text="Movie Title: " textFill="WHITE">
+                                    <Label styleClass="editScreeningComp" stylesheets="@../javacomp/styling.css" text="Movie Title:" textFill="WHITE">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -160,7 +161,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="movieTimeSlot1TF" prefHeight="25.0" prefWidth="265.0" styleClass="editScreeningTexfields" stylesheets="@../javacomp/styling.css" />
+                                    <TextField fx:id="movieTimeSlot1TF" onAction="#setDialogLabelClear" prefHeight="25.0" prefWidth="265.0" styleClass="editScreeningTexfields" stylesheets="@../javacomp/styling.css" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="210.0" prefHeight="50.0" prefWidth="200.0" spacing="20.0">
@@ -170,7 +171,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="movieTimeSlot2TF" prefHeight="25.0" prefWidth="265.0" styleClass="editScreeningTexfields" stylesheets="@../javacomp/styling.css" />
+                                    <TextField fx:id="movieTimeSlot2TF" onAction="#setDialogLabelClear" prefHeight="25.0" prefWidth="265.0" styleClass="editScreeningTexfields" stylesheets="@../javacomp/styling.css" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="310.0" prefHeight="50.0" prefWidth="200.0" spacing="20.0">
@@ -180,7 +181,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="movieTimeSlot3TF" prefWidth="265.0" styleClass="editScreeningTexfields" stylesheets="@../javacomp/styling.css" />
+                                    <TextField fx:id="movieTimeSlot3TF" onAction="#setDialogLabelClear" prefWidth="265.0" styleClass="editScreeningTexfields" stylesheets="@../javacomp/styling.css" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="353.0" prefHeight="50.0" prefWidth="200.0" spacing="20.0">
@@ -190,7 +191,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="uploadB" mnemonicParsing="false" onMouseClicked="#addMoviePoster" prefHeight="25.0" prefWidth="268.0" styleClass="editScreeningB" stylesheets="@../javacomp/styling.css" text="Upload Photo">
+                                    <Button fx:id="uploadB" mnemonicParsing="false" onAction="#setDialogLabelClear" onMouseClicked="#addMoviePoster" prefHeight="25.0" prefWidth="268.0" styleClass="editScreeningB" stylesheets="@../javacomp/styling.css" text="Upload Photo">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -256,7 +257,6 @@
             </SplitPane>
          </children>
       </Pane>
-      <Pane fx:id="customerPane" layoutX="78.0" prefHeight="738.0" prefWidth="1289.0" style="-fx-background-color: #282827;" />
       <Pane fx:id="dashboardPane" layoutX="78.0" prefHeight="738.0" prefWidth="1289.0" style="-fx-background-color: #282827;">
          <children>
             <VBox alignment="TOP_CENTER" layoutX="40.0" layoutY="150.0" prefHeight="540.0" prefWidth="1189.0" spacing="20.0">
@@ -383,17 +383,17 @@
                            <children>
                               <VBox alignment="CENTER" prefHeight="369.0" prefWidth="282.0">
                                  <children>
-                                    <ImageView fitHeight="310.0" fitWidth="229.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="posterIcon1" fitHeight="280.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../images/pearl%20movie%20poster.jpg" />
                                        </image>
                                     </ImageView>
-                                    <Label alignment="CENTER" prefHeight="33.0" prefWidth="282.0" text="MovieName" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                    <Label fx:id="posterLabel1" alignment="CENTER" prefHeight="70.0" prefWidth="250.0" styleClass="moviePosterLabels" stylesheets="@../javacomp/styling.css" text="MovieName" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                        <VBox.margin>
-                                          <Insets top="10.0" />
+                                          <Insets />
                                        </VBox.margin>
                                     </Label>
                                  </children>
@@ -409,17 +409,17 @@
                            <children>
                               <VBox alignment="CENTER" prefHeight="369.0" prefWidth="282.0">
                                  <children>
-                                    <ImageView fitHeight="310.0" fitWidth="229.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="posterIcon2" fitHeight="280.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../images/pearl%20movie%20poster.jpg" />
                                        </image>
                                     </ImageView>
-                                    <Label alignment="CENTER" prefHeight="33.0" prefWidth="282.0" text="MovieName" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                    <Label fx:id="posterLabel2" alignment="CENTER" prefHeight="70.0" prefWidth="250.0" styleClass="moviePosterLabels" stylesheets="@../javacomp/styling.css" text="MovieName" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                        <VBox.margin>
-                                          <Insets top="10.0" />
+                                          <Insets />
                                        </VBox.margin>
                                     </Label>
                                  </children>
@@ -435,17 +435,17 @@
                            <children>
                               <VBox alignment="CENTER" prefHeight="369.0" prefWidth="282.0">
                                  <children>
-                                    <ImageView fitHeight="310.0" fitWidth="229.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="posterIcon3" fitHeight="280.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../images/pearl%20movie%20poster.jpg" />
                                        </image>
                                     </ImageView>
-                                    <Label alignment="CENTER" prefHeight="33.0" prefWidth="282.0" text="MovieName" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                    <Label fx:id="posterLabel3" alignment="CENTER" prefHeight="70.0" prefWidth="250.0" styleClass="moviePosterLabels" stylesheets="@../javacomp/styling.css" text="MovieName" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                        <VBox.margin>
-                                          <Insets top="10.0" />
+                                          <Insets />
                                        </VBox.margin>
                                     </Label>
                                  </children>
@@ -461,17 +461,17 @@
                            <children>
                               <VBox alignment="CENTER" prefHeight="369.0" prefWidth="282.0">
                                  <children>
-                                    <ImageView fitHeight="310.0" fitWidth="229.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="posterIcon4" fitHeight="280.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../images/pearl%20movie%20poster.jpg" />
                                        </image>
                                     </ImageView>
-                                    <Label alignment="CENTER" prefHeight="33.0" prefWidth="282.0" text="MovieName" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                    <Label fx:id="posterLabel4" alignment="CENTER" prefHeight="70.0" prefWidth="250.0" styleClass="moviePosterLabels" stylesheets="@../javacomp/styling.css" text="MovieName" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                        <VBox.margin>
-                                          <Insets top="10.0" />
+                                          <Insets />
                                        </VBox.margin>
                                     </Label>
                                  </children>
