@@ -139,6 +139,29 @@ public class AdminController implements Initializable {
     private ImageView posterIcon4;
     @FXML
     private Label posterLabel4;
+    @FXML
+    private Label totalNumOfSales;
+    @FXML
+    private Label totalNumOfTicketsSold;
+    @FXML
+    private Label totalNumOfSnackSold;
+    int snackTotal;
+    @FXML
+    private TableView<CustomerList> customerList;
+    @FXML
+    private TableColumn<CustomerList, String> ID;
+    @FXML
+    private TableColumn<CustomerList, String> Title;
+    @FXML
+    private TableColumn<CustomerList, String> Time;
+    @FXML
+    private TextField idTF;
+    
+          int id;
+        String title;
+        String time;
+    @FXML
+    private Label dlabel;
     
 
 
@@ -149,6 +172,8 @@ public class AdminController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         Database.connect();
         displayMoviePosters();
+        setTotalNumOfSales();
+        setTotalNumOfSnackSold();
  
         Image icon = new Image("/images/dashboard-icon-hover.png");
         dashboardImg.setImage(icon); 
@@ -161,6 +186,40 @@ public class AdminController implements Initializable {
         adButtons[2] = editScreeningB;
                 
     
+    }
+    
+    void setTotalNumOfSales(){
+         try {
+            ps = Database.connect().prepareStatement("SELECT COUNT(`Ticket No.`) FROM ticketlist;");
+            rs = ps.executeQuery();
+            if(rs.next()){
+                int rowCount = rs.getInt("COUNT(`Ticket No.`)");
+                totalNumOfTicketsSold.setText(Integer. toString(rowCount));
+                
+                //to calculate and display the total sales;
+                int total = (rowCount * 200);
+                totalNumOfSales.setText("₱" +Integer. toString(total));
+            }
+            } catch (SQLException ex) {
+            Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
+            }    
+    }
+    
+    void setTotalNumOfSnackSold(){
+        snackTotal = 0;
+        try {
+            ps = Database.connect().prepareStatement("SELECT `Snack` FROM `ticketlist`");
+            rs = ps.executeQuery();
+            while(rs.next()){
+                int s = rs.getInt(1);
+                
+                snackTotal += s;
+            }
+            totalNumOfSnackSold.setText("₱" +snackTotal);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     
@@ -202,6 +261,7 @@ public class AdminController implements Initializable {
             else if(i == 1){
                 Image icon = new Image("/images/customer-icon-hover.png");
                 customerImg.setImage(icon);
+                customerListTable();
                 customerPane.toFront();
             }
             else if(i == 2){               
@@ -310,6 +370,38 @@ public class AdminController implements Initializable {
             } catch (SQLException ex) {
                 Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
             }  
+        }
+    }
+     
+    void getSelectedCustomer(int id, String tt, String tm){
+        
+    }
+    void customerListTable(){
+  
+        javacomp.Database.connect();
+        ObservableList<CustomerList> ctable = FXCollections.observableArrayList();
+        try {       
+            ps = Database.connect().prepareStatement("SELECT `ID`,`Title`, `Time` FROM `ticketlist`");
+            rs = ps.executeQuery();
+            {
+            while(rs.next()){
+                CustomerList c = new CustomerList();
+                c.setID(String.valueOf(rs.getInt("ID")));
+                c.setTitle(rs.getString("Title"));
+                c.setTime(rs.getString("Time"));;
+                 ctable.add(c);
+
+                
+            }
+            }
+            
+            customerList.setItems(ctable); 
+            ID.setCellValueFactory(c->c.getValue().IDProperty());
+            Title.setCellValueFactory(c->c.getValue().TitleProperty());
+            Time.setCellValueFactory(c->c.getValue().TimeProperty());
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -488,6 +580,7 @@ public class AdminController implements Initializable {
     private void deleteMovieFromDatabase(MouseEvent event) {
         //delete movie from the list
         mid = movieIDTF.getText();
+        
 
         try{
             ps = Database.connect().prepareStatement("DELETE FROM `movielist` WHERE `movieID` = ?");
@@ -615,6 +708,81 @@ public class AdminController implements Initializable {
     @FXML
     private void setDialogLabelClear(ActionEvent event) {
         dialogLabel.setText("");
+    }
+
+    @FXML
+    private void getCustomerIDFromTF(ActionEvent event) {
+        dlabel.setText("");
+        if(idTF.getText() != ""){
+        mid =  idTF.getText();
+
+        try{
+            ps = Database.connect().prepareStatement("SELECT `ID`,`Title`, `Time` FROM `ticketlist` WHERE `ID` = ?");
+            ps.setString(1, mid);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next() == true){
+                id = rs.getInt("ID");
+                title = rs.getString("Title");
+                time = rs.getString("Time");
+            }
+
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        javacomp.Database.connect();
+        ObservableList<CustomerList> ctable = FXCollections.observableArrayList();
+         ctable.clear();
+        try {       
+            ps = Database.connect().prepareStatement("SELECT `ID`,`Title`, `Time` FROM `ticketlist` WHERE `ID` = ?");
+            ps.setString(1, mid);
+            rs = ps.executeQuery();
+            {
+            while(rs.next()){
+                CustomerList c = new CustomerList();
+                c.setID(String.valueOf(rs.getInt("ID")));
+                c.setTitle(rs.getString("Title"));
+                c.setTime(rs.getString("Time"));;
+                ctable.add(c);
+
+                
+            }
+            }
+            
+            customerList.setItems(ctable); 
+            ID.setCellValueFactory(c->c.getValue().IDProperty());
+            Title.setCellValueFactory(c->c.getValue().TitleProperty());
+            Time.setCellValueFactory(c->c.getValue().TimeProperty());
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+        }
+        else if (idTF.getText() != ""){
+            customerListTable();
+        }
+
+    }
+
+    @FXML
+    private void deleteCustomerFromDatabase(MouseEvent event) {
+          //delete movie from the list
+        mid =  idTF.getText();
+        
+
+        try{
+            ps = Database.connect().prepareStatement("DELETE FROM `ticketList` WHERE `ID` = ?");
+            ps.setString(1, mid);
+
+            ps.executeUpdate();
+            idTF.setText("");
+            dlabel.setText("Transaction Deleted Successfully");
+            customerListTable();
+            
+  
+
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }            
     }
     
 

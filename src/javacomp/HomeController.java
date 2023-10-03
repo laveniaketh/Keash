@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,6 +19,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.print.JobSettings;
+import javafx.print.PageLayout;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -26,13 +29,16 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.print.PrinterJob;
 
 
 public class HomeController implements Initializable {
@@ -891,12 +897,29 @@ public class HomeController implements Initializable {
     int inPrice;
     int sqty;
     String sSnack;
+    String seatl = "";
     @FXML
     private Label snackSummary;
     @FXML
     private Label movieP;
     @FXML
     private Button signUpB;
+    @FXML
+    private Button printReceiptB;
+    @FXML
+    private VBox vbox;
+    @FXML
+    private TextArea receipt;
+    
+     
+    int ticketTotal;
+    int snackTotal = 0;
+    int total;
+    int initsnack;
+    
+    int code;
+    
+
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -1457,8 +1480,6 @@ public class HomeController implements Initializable {
         selectedSnackList.clear();
         selectedSnackNames.clear();
         selectedSnackPrice.clear();
-                System.out.println("snacks price:  " + selectedSnackNames);
-    System.out.println("snacks price:  " + selectedSnackPrice);
         if(clickseat == ticketqty.getValue()){
             snackbarpane.toFront();
             disableAllSnackCBSpinner();
@@ -1546,8 +1567,6 @@ public class HomeController implements Initializable {
  
     void setSelectedSnacks(){
         selectedSnackList.clear();
-        System.out.println("snacks name:  " + selectedSnackNames);
-    System.out.println("snacks price:  " + selectedSnackPrice);
 
 
     for(int x = 0; x <selectedSnackNames.size();x++ ){
@@ -1624,14 +1643,10 @@ public class HomeController implements Initializable {
     }
     slist = "";
     for(int x = 0;x < selectedSnackList.size(); x++){
-        slist += selectedSnackList.get(x) + ", ";
-        System.out.println(slist);
+        slist += selectedSnackList.get(x) + ", ";;
            }
     ssnacks.setText(slist);
     snackSummary.setText(slist);
-        
-    System.out.println(selectedSnackList);
-    
     
 
     }
@@ -1642,10 +1657,7 @@ public class HomeController implements Initializable {
         totalSnackPrice.setText("");
         totalPriceLabel.setText("");
         ArrayList<Integer> initTotalSnack = new ArrayList();
-        int ticketTotal;
-        int snackTotal = 0;
-        int total;
-        int initsnack;
+
         pticketqty.setText(String.valueOf(ticketqty.getValue()));
         if(selectedSnackNames != null){
             setSelectedSnacks();
@@ -1722,15 +1734,12 @@ public class HomeController implements Initializable {
     void setSummaryDetails(){
         movieTitleConfirm.setText(getMovie());      
         String m = getMovie();
-        String s = "";
         String t = (String) timeslotComboBox.getValue();
         int tqty = ticketqty.getValue();
         if(selectedSnackNames != null){
            setSelectedSnacks();
         }
-
-        
-        try {
+       try {
             ps = Database.connect().prepareStatement("SELECT `Poster` FROM `movielist` WHERE `Title`=?");
                 ps.setString(1, m);
                 rs = ps.executeQuery();
@@ -1745,9 +1754,9 @@ public class HomeController implements Initializable {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
         for(int x = 0; x < seatn.size(); x++){
-             s += "S" + (String.valueOf(seatn.get(x) + ", "));
+             seatl += "S" + (String.valueOf(seatn.get(x) + ", "));
         }
-        sseats.setText(s);
+        sseats.setText(seatl);
         smovie.setText(m);
         stime.setText(t);
         sticketqty.setText(String.valueOf(tqty));
@@ -1905,17 +1914,24 @@ public class HomeController implements Initializable {
         confirmationPB.setStyle("-fx-font-family: 'Work Sans', sans-serif; -fx-font-size: 20; -fx-text-fill: #6E6E6D;");
         snackPB.setStyle("-fx-font-family: 'Work Sans', sans-serif; -fx-font-size: 20; -fx-text-fill: #FFFFFF;");
     }
+    public static int genCode() {
+    Random r = new Random( System.currentTimeMillis() );
+    return ((1 + r.nextInt(2)) * 10000 + r.nextInt(10000));
+}
     
     void insertTicketTransactionToDatabase(){
+         code = genCode();
         for(int i = 0; i < ticketqty.getValue(); i++){
             String m = getMovie();
             String t = String.valueOf(timeslotComboBox.getValue());
             int s = seatn.get(i);
             try {
-                ps = Database.connect().prepareStatement("INSERT INTO `ticketlist`(`Title`, `Time`, `Seat no.`) VALUES (?,?,?)");
-                ps.setString(1, m);
-                ps.setString(2, t);
-                ps.setInt(3, s);
+                ps = Database.connect().prepareStatement("INSERT INTO `ticketlist`(`ID`,`Title`, `Time`, `Seat no.`, `Snack`) VALUES (?,?,?,?,?)");
+                ps.setInt(1, code);
+                ps.setString(2, m);
+                ps.setString(3, t);
+                ps.setInt(4, s);
+                ps.setInt(5, snackTotal);
                 ps.executeUpdate();
             } catch (SQLException ex) {
                 Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
@@ -1924,11 +1940,50 @@ public class HomeController implements Initializable {
             
         }
     }
+    
+    void generateReceipt(){
+        //to generate receipt
+        
+        ticketTotal = 200 * ticketqty.getValue();
+        total = snackTotal + ticketTotal;
+        movieP.setText(getMovie());
+        totalTicketPrice.setText("₱" + String.valueOf(ticketTotal));
+        totalSnackPrice.setText("₱" + String.valueOf(snackTotal));
+        totalPriceLabel.setText("TOTAL : ₱" + String.valueOf(total));   
+        
+        receipt.setText(receipt.getText()+ "-----------------------------------------\n");
+        receipt.setText(receipt.getText()+ "                        KEASH              \n");
+        receipt.setText(receipt.getText()+ "KEASH Inc.                           \n");
+        receipt.setText(receipt.getText()+ "Davao City, Philippines                \n");
+        receipt.setText(receipt.getText()+ "-----------------------------------------\n");;
+        receipt.setText(receipt.getText()+ "ID : " + code + "\n");
+        receipt.setText(receipt.getText()+ "MOVIE : " + getMovie()+ "\n");
+        receipt.setText(receipt.getText()+ "SNACK(S) : "+ slist + "\n");
+        receipt.setText(receipt.getText()+ "TIME  : " + timeslotComboBox.getValue()+ "\n");
+        receipt.setText(receipt.getText()+ "SEAT  : " + seatl + "\n");
+        receipt.setText(receipt.getText()+ "\n");
+        receipt.setText(receipt.getText()+ "-----------------------------------------\n");
+        receipt.setText(receipt.getText()+ "\n");
+        receipt.setText(receipt.getText()+ getMovie() + "\n");
+        receipt.setText(receipt.getText()+ "                                                  ₱200 \n");
+        receipt.setText(receipt.getText()+ "                                              x     "+ ticketqty.getValue() +"\n");
+        receipt.setText(receipt.getText()+ "                                      -------------\n");
+        receipt.setText(receipt.getText()+ "                                                  ₱" + ticketTotal+ "\n");  
+        receipt.setText(receipt.getText()+ "SNACK(S) : "+ slist + "\n");
+        receipt.setText(receipt.getText()+ "                                                  ₱" +snackTotal +"\n");
+        receipt.setText(receipt.getText()+ "                                      --------------\n");
+        receipt.setText(receipt.getText()+ "TOTAL  :                                   ₱" + String.valueOf(total)+"\n");   
+        receipt.setText(receipt.getText()+ "-----------------------------------------\n");        
+
+    }
+    
+    
 
     @FXML
     private void proceedToDone(MouseEvent event) {
         donePane.toFront();
         insertTicketTransactionToDatabase();
+        generateReceipt();
         confirmationPB.setStyle("-fx-font-family: 'Work Sans', sans-serif; -fx-font-size: 20; -fx-text-fill: #6E6E6D;");
         donePB.setStyle("-fx-font-family: 'Work Sans', sans-serif; -fx-font-size: 20; -fx-text-fill: #FFFFFF;");       
     }
@@ -2121,15 +2176,13 @@ public class HomeController implements Initializable {
                 
             }               
             }
-        System.out.println("snacks:  " + selectedSnackNames);
-   System.out.println("snacks price:  " + selectedSnackPrice);
+
 
     }
 
     @FXML
     private void selectSnackSolo(MouseEvent event) {
         ToggleButton sb =  (ToggleButton) event.getSource();
-        //String selectedSnacks[][] = new String[][]{};
         String snackSolon;
         int snackqty;
         int sprice;
@@ -2247,8 +2300,7 @@ public class HomeController implements Initializable {
         
                 
                     
-   }System.out.println("snacks:  " + selectedSnackNames);
-   System.out.println("snacks price:  " + selectedSnackPrice);
+   }
                           
     }
 
@@ -2299,13 +2351,42 @@ public class HomeController implements Initializable {
         stage.show();       
     }
 
+    @FXML
+    private void printReceipt(MouseEvent event) {
+        PrinterJob job = PrinterJob.createPrinterJob();
+        
+        if(job == null) {
+            System.out.println("Error");
+            return;
+        }
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        boolean proseed = job.showPrintDialog(stage);
+
+        JobSettings ss1 = job.getJobSettings();
+
+        PageLayout pageLayout1 = ss1.getPageLayout();
+
+        double pgW1 = pageLayout1.getPrintableWidth();
+        double pgH1 = pageLayout1.getPrintableHeight();
+
+        TextArea tempTxtArea = new TextArea(receipt.getText());
+        tempTxtArea.setPrefSize(377, 500);
+        tempTxtArea.setWrapText(true);
+        tempTxtArea.setId("tempScroolBar");
+
+        if(proseed) {
+            boolean printed = job.printPage(tempTxtArea);
+
+            if (printed) {
+                job.endJob();
+            } else {
+                System.out.println("Fail");
+            }
+        }      
+        }
+
       
 }
 
-
-
-
-        
-    
-    
     

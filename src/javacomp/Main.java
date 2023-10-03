@@ -37,6 +37,9 @@ public class Main extends Application {
              
             String css = this.getClass().getResource("styling.css").toExternalForm();
             scene.getStylesheets().add(css);
+            scene.getStylesheets().add("https://fonts.googleapis.com/css2?family=Work+Sans&display=swap");
+            scene.getStylesheets().add("https://fonts.googleapis.com/css2?family=Bungee+Inline&display=swap");
+            scene.getStylesheets().add("https://fonts.googleapis.com/css2?family=Gabarito&display=swap");
                 
              stage.setScene(scene);
              stage.show();

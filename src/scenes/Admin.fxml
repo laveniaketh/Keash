@@ -107,7 +107,6 @@
             </StackPane>
          </children>
       </VBox>
-      <Pane fx:id="customerPane" layoutX="78.0" prefHeight="738.0" prefWidth="1289.0" style="-fx-background-color: #282827;" />
       <Pane fx:id="editScreeningPane" layoutX="78.0" prefHeight="738.0" prefWidth="1289.0" style="-fx-background-color: #282827;" styleClass="editScreeningComp" stylesheets="@../javacomp/styling.css">
          <children>
             <SplitPane dividerPositions="0.55" prefHeight="738.0" prefWidth="1289.0" style="-fx-background-color: #282827;">
@@ -222,13 +221,13 @@
                               </Button>
                            </children>
                         </VBox>
-                        <TableView fx:id="movieListTable" layoutX="10.0" layoutY="20.0" prefHeight="180.0" prefWidth="687.0" style="-fx-background-color: #282827;" styleClass="tableLabels" stylesheets="@../javacomp/styling.css">
+                        <TableView fx:id="movieListTable" layoutX="10.0" layoutY="20.0" prefHeight="180.0" prefWidth="687.0" styleClass="tableLabels" stylesheets="@../javacomp/styling.css">
                           <columns>
-                            <TableColumn id="column1" fx:id="movieIDcol" prefWidth="44.0" style="-fx-background-color: #20201F;" text="ID" />
-                            <TableColumn id="column2" fx:id="movieTitleCol" prefWidth="312.0" style="-fx-background-color: #20201F;" text="Title" />
-                              <TableColumn id="column2" fx:id="timeslot1Col" prefWidth="106.0" style="-fx-background-color: #20201F;" text="Timeslot 1" />
-                              <TableColumn id="column2" fx:id="timeslot2Col" prefWidth="108.0" style="-fx-background-color: #20201F;" text="Timeslot 2" />
-                              <TableColumn id="column2" fx:id="timeslot3Col" prefWidth="102.0" style="-fx-background-color: #20201F;" text="Timeslot 3" />
+                            <TableColumn id="column1" fx:id="movieIDcol" prefWidth="44.0" style="-fx-background-color: #FFFFFF;" text="ID" />
+                            <TableColumn id="column2" fx:id="movieTitleCol" prefWidth="312.0" style="-fx-background-color: #FFFFFF;" text="Title" />
+                              <TableColumn id="column2" fx:id="timeslot1Col" prefWidth="106.0" style="-fx-background-color: #FFFFFF;" styleClass="tableColumnStyle" text="Timeslot 1" />
+                              <TableColumn id="column2" fx:id="timeslot2Col" prefWidth="108.0" style="-fx-background-color: #FFFFFF;" styleClass="tableColumnStyle" text="Timeslot 2" />
+                              <TableColumn id="column2" fx:id="timeslot3Col" prefWidth="102.0" style="-fx-background-color: #FFFFFF;" styleClass="tableColumnStyle" text="Timeslot 3" />
                           </columns>
                         </TableView>
                         <Label fx:id="dialogLabel" alignment="TOP_LEFT" layoutX="462.0" layoutY="432.0" prefHeight="149.0" prefWidth="232.0" styleClass="editScreeningComp" stylesheets="@../javacomp/styling.css" wrapText="true" />
@@ -257,6 +256,58 @@
             </SplitPane>
          </children>
       </Pane>
+      <Pane fx:id="customerPane" layoutX="78.0" prefHeight="738.0" prefWidth="1289.0" style="-fx-background-color: #282827;">
+         <children>
+            <VBox alignment="CENTER" prefHeight="738.0" prefWidth="1289.0">
+               <children>
+                  <VBox alignment="CENTER" fillWidth="false" layoutX="10.0" layoutY="190.0" prefHeight="614.0" prefWidth="1289.0" spacing="10.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="32.0" prefWidth="235.0" styleClass="CustomerLabel" stylesheets="@../javacomp/styling.css" text="Customer List" textFill="WHITE">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <TableView fx:id="customerList" prefHeight="378.0" prefWidth="796.0" styleClass="tableLabels" stylesheets="@../javacomp/styling.css">
+                           <columns>
+                              <TableColumn id="column1" fx:id="ID" prefWidth="134.0" style="-fx-background-color: #FFFFFF;" text="ID" />
+                              <TableColumn id="column2" fx:id="Title" prefWidth="430.0" style="-fx-background-color: #FFFFFF;" text="Title" />
+                              <TableColumn id="column2" fx:id="Time" minWidth="0.0" prefWidth="211.0" style="-fx-background-color: #FFFFFF;" styleClass="tableColumnStyle" text="Time" />
+                           </columns>
+                        </TableView>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="902.0" spacing="20.0">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="596.0" spacing="20.0">
+                                 <children>
+                                    <Label styleClass="editScreeningComp" stylesheets="@../javacomp/styling.css" text="Movie ID: " textFill="WHITE">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="idTF" onKeyReleased="#changeInputEveryKeyReleased" prefHeight="33.0" prefWidth="126.0" styleClass="editScreeningTexfields" stylesheets="@../javacomp/styling.css" />
+                                    <Button mnemonicParsing="false" onAction="#getCustomerIDFromTF" prefHeight="18.0" prefWidth="111.0" styleClass="editScreeningB" stylesheets="@../javacomp/styling.css" text="Select">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Button>
+                                    <Button mnemonicParsing="false" onMouseClicked="#deleteCustomerFromDatabase" prefHeight="18.0" prefWidth="111.0" styleClass="editScreeningB" stylesheets="@../javacomp/styling.css" text="Delete">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
+                        <Label fx:id="dlabel" alignment="CENTER" layoutX="586.0" layoutY="52.0" prefHeight="32.0" prefWidth="650.0" textFill="WHITE">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children></Pane>
       <Pane fx:id="dashboardPane" layoutX="78.0" prefHeight="738.0" prefWidth="1289.0" style="-fx-background-color: #282827;">
          <children>
             <VBox alignment="TOP_CENTER" layoutX="40.0" layoutY="150.0" prefHeight="540.0" prefWidth="1189.0" spacing="20.0">
@@ -277,38 +328,12 @@
                                     </ImageView>
                                     <VBox alignment="CENTER" prefHeight="75.0" prefWidth="219.0">
                                        <children>
-                                          <Label prefHeight="28.0" prefWidth="227.0" styleClass="SummaryContainerLabel" stylesheets="@../javacomp/styling.css" text="PHP 1000" textFill="WHITE">
+                                          <Label fx:id="totalNumOfSales" prefHeight="28.0" prefWidth="227.0" styleClass="SummaryContainerLabel" stylesheets="@../javacomp/styling.css" textFill="WHITE">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Label>
                                           <Label layoutX="10.0" layoutY="10.0" prefHeight="18.0" prefWidth="236.0" text="Total Number of Sales" textFill="WHITE" />
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </StackPane>
-                        <StackPane layoutX="10.0" layoutY="10.0" prefHeight="65.0" prefWidth="250.0" styleClass="SummaryContainer" stylesheets="@../javacomp/styling.css">
-                           <children>
-                              <HBox alignment="CENTER_LEFT" prefHeight="90.0" prefWidth="364.0" spacing="5.0">
-                                 <children>
-                                    <ImageView fitHeight="64.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../images/seatdb.png" />
-                                       </image>
-                                       <HBox.margin>
-                                          <Insets left="10.0" />
-                                       </HBox.margin>
-                                    </ImageView>
-                                    <VBox alignment="CENTER" prefHeight="75.0" prefWidth="249.0">
-                                       <children>
-                                          <Label prefHeight="28.0" prefWidth="215.0" styleClass="SummaryContainerLabel" stylesheets="@../javacomp/styling.css" text="PHP 1000" textFill="WHITE">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Label>
-                                          <Label layoutX="10.0" layoutY="10.0" prefHeight="18.0" prefWidth="223.0" text="Total Seats Available" textFill="WHITE" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -329,7 +354,7 @@
                                     </ImageView>
                                     <VBox alignment="CENTER" prefHeight="75.0" prefWidth="199.0">
                                        <children>
-                                          <Label prefHeight="28.0" prefWidth="199.0" styleClass="SummaryContainerLabel" stylesheets="@../javacomp/styling.css" text="PHP 1000" textFill="WHITE">
+                                          <Label fx:id="totalNumOfTicketsSold" prefHeight="28.0" prefWidth="199.0" styleClass="SummaryContainerLabel" stylesheets="@../javacomp/styling.css" textFill="WHITE">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -355,7 +380,7 @@
                                     </ImageView>
                                     <VBox alignment="CENTER" prefHeight="75.0" prefWidth="199.0">
                                        <children>
-                                          <Label prefHeight="28.0" prefWidth="199.0" styleClass="SummaryContainerLabel" stylesheets="@../javacomp/styling.css" text="PHP 1000" textFill="WHITE">
+                                          <Label fx:id="totalNumOfSnackSold" prefHeight="28.0" prefWidth="199.0" styleClass="SummaryContainerLabel" stylesheets="@../javacomp/styling.css" textFill="WHITE">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>

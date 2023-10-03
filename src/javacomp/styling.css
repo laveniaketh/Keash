@@ -1,7 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@500&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bungee+Inline&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Gabarito&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gabarito&display=swap');*/
 
 
 /*START STYLING*/
@@ -135,11 +134,35 @@
     -fx-background-radius: 10; 
 }
 
-
 #backToHomeB:hover{
   -fx-background-color: #6E6E6D;
    -fx-text-fill: #FFFF;
 }
+
+#printReceiptB{
+    -fx-font-size: 18;
+    -fx-background-color: #FECB53;
+    -fx-font-family: 'Work Sans', sans-serif;
+    -fx-text-fill: #262625;
+    -fx-background-radius: 10; 
+}
+
+#printReceiptB:hover{
+  -fx-background-color: #6E6E6D;
+   -fx-text-fill: #FFFFFF;
+}
+
+.InfoLabel{
+     -fx-font-size: 25;
+     -fx-font-family: 'Gabarito', cursive;
+    -fx-text-fill: #FFFFFF;     
+}
+#receipt{
+    -fx-font-size: 20;
+    -fx-font-family: 'Gabarito', cursive;
+    -fx-text-fill: #282827; 
+}
+
 /*ADMIN SYLING*/
 
 .iconLabels{
@@ -169,7 +192,7 @@
     -fx-font-size: 20;
     -fx-background-color: transparent;
     -fx-font-family: 'Work Sans', sans-serif;
-    -fx-text-fill: #FFFF;    
+    -fx-text-fill: #FFFFFF;    
 }
 .fpLabel{
     -fx-font-size: 15;
@@ -222,28 +245,34 @@
 }
 #getStartedB:hover{
     -fx-background-color: #6E6E6D;
-    -fx-text-fill: #FFFF;
+    -fx-text-fill: #FFFFFF;
 }
 
 /*EDIT SCREENING TAB*/
 .tableLabels{
     -fx-font-size: 18;
     -fx-font-family: 'Work Sans', sans-serif;
-    -fx-text-fill: #FFFF;
+    -fx-text-fill: #FFFFFF;
 }
 .table-view .column-header-background {
-    -fx-background-color:  #282827;
+    -fx-background-color:  #FFFFFF;
 }
 
 .table-view .column-header-background .label {
     -fx-font-size: 18;
     -fx-font-family: 'Work Sans', sans-serif;
-    -fx-text-fill: #FFFFFF;
+    -fx-text-fill: #262625;
 }
 
 .table-view .column-header, .table-view.filler {
     -fx-background-color: transparent;
-    -fx-fill: #FFF;
+    -fx-text-fill: #262625;
+}
+tableColumnStyle{
+    -fx-font-size: 18;
+    -fx-font-family: 'Work Sans', sans-serif;
+    -fx-text-fill: #FFFFFF; 
+    -fx-background-color:  #20201F;
 }
 .editScreeningComp{
     -fx-font-size: 18;
@@ -324,6 +353,13 @@
     -fx-font-size: 15;
     -fx-font-family: 'Work Sans', sans-serif; 
     -fx-text-fill: #FFFFFF;    
+}
+
+/*CUSTOMER TAB*/
+.CustomerLabel{
+    -fx-font-size: 20;
+    -fx-font-family: 'Work Sans', sans-serif;
+    -fx-text-fill: #FFFFFF;
 }
 
 

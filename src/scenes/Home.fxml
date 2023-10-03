@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.effect.InnerShadow?>
@@ -4124,6 +4125,63 @@
             </HBox>
          </children>
       </Pane>
+      <Pane fx:id="donePane" layoutY="50.0" prefHeight="698.0" prefWidth="1366.0" style="-fx-background-color: #282827;">
+         <children>
+            <ImageView fitHeight="698.0" fitWidth="1366.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/booked-successfully.png" />
+               </image>
+            </ImageView>
+            <Pane layoutX="483.0" layoutY="249.0" prefHeight="301.0" prefWidth="759.0" style="-fx-background-color: #282827;">
+               <children>
+                  <Button fx:id="signUpB" layoutX="124.0" layoutY="112.0" mnemonicParsing="false" onMouseClicked="#proceedToStart" prefHeight="28.0" prefWidth="150.0" text="Back to Home">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <VBox fx:id="vbox" layoutX="-29.0" layoutY="21.0" prefHeight="91.0" prefWidth="487.0" spacing="5.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="32.0" prefWidth="644.0" styleClass="InfoLabel" text="Please proceed to cinema cashier" textFill="WHITE">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="32.0" prefWidth="598.0" styleClass="InfoLabel" text="Thank you and come again" textFill="WHITE">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children></Pane>
+            <TextArea fx:id="receipt" editable="false" layoutX="950.0" layoutY="161.0" prefHeight="380.0" prefWidth="377.0" scrollTop="20.0" wrapText="true">
+               <font>
+                  <Font size="20.0" />
+               </font></TextArea>
+            <StackPane layoutX="953.0" layoutY="554.0" prefHeight="53.0" prefWidth="377.0">
+               <children>
+                  <Button fx:id="printReceiptB" alignment="CENTER_RIGHT" mnemonicParsing="false" onMouseClicked="#printReceipt" prefHeight="39.0" prefWidth="158.0" text="Print Receipt">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <ImageView fitHeight="31.0" fitWidth="68.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/receipt.png" />
+                     </image>
+                     <StackPane.margin>
+                        <Insets right="115.0" />
+                     </StackPane.margin>
+                  </ImageView>
+               </children>
+            </StackPane>
+         </children></Pane>
       <Pane fx:id="confirmpane" layoutY="50.0" prefHeight="698.0" prefWidth="1366.0" style="-fx-background-color: #282827;">
          <children>
             <ImageView fitHeight="698.0" fitWidth="711.0" layoutX="650.0" pickOnBounds="true" preserveRatio="true">
@@ -4382,22 +4440,6 @@
             </StackPane>
          </children>
       </Pane>
-      <Pane fx:id="donePane" layoutY="50.0" prefHeight="698.0" prefWidth="1366.0" style="-fx-background-color: #282827;">
-         <children>
-            <ImageView fitHeight="698.0" fitWidth="1366.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/booked-successfully.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="signUpB" layoutX="704.0" layoutY="554.0" mnemonicParsing="false" onMouseClicked="#proceedToStart" prefHeight="51.0" prefWidth="331.0" text="Back to Home">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-         </children></Pane>
       <Pane fx:id="moviePane" layoutY="50.0" prefHeight="698.0" prefWidth="1366.0" style="-fx-background-color: #282827;">
          <children>
             <ImageView fitHeight="698.0" fitWidth="1366.0" layoutX="-2.0" layoutY="-96.0" pickOnBounds="true" preserveRatio="true" y="95.0">
